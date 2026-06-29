@@ -13,7 +13,7 @@ const STORAGE_KEYS = {
   IRRIGATION: 'kisanalert_irrigation_log',
 };
 
-function MiniBarChart({ data, maxVal, color = '#EAB308', label = '' }) {
+function MiniBarChart({ data, maxVal, color = '#E5A914', label = '' }) {
   const max = maxVal || Math.max(...data.map(d => d.value), 1);
   return (
     <div className="flex items-end gap-1.5 h-32 mt-3">
@@ -310,7 +310,7 @@ export default function Dashboard() {
               <input value={milkInput} onChange={e => setMilkInput(e.target.value)} placeholder="Litres" type="number" className={inputSmClass} />
               <button onClick={addMilkEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {milkLog.length > 0 && <MiniBarChart data={chartData(milkLog)} color="#854D0E" />}
+            {milkLog.length > 0 && <MiniBarChart data={chartData(milkLog)} color="#6F8E2E" />}
           </div>
 
           {/* Weight */}
@@ -327,7 +327,7 @@ export default function Dashboard() {
               <input value={weightInput} onChange={e => setWeightInput(e.target.value)} placeholder="Kg" type="number" className={inputSmClass} />
               <button onClick={addWeightEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {weightLog.length > 0 && <MiniBarChart data={chartData(weightLog)} color="#F59E0B" />}
+            {weightLog.length > 0 && <MiniBarChart data={chartData(weightLog)} color="#E5A914" />}
           </div>
 
           {/* AI Feed Optimizer */}
@@ -358,7 +358,7 @@ export default function Dashboard() {
                 <TrendingUp className="w-4 h-4 text-aqua animate-bounce" />
                 <p className="font-display text-[10px] sm:text-xs text-charcoalDark/50 dark:text-white/50 uppercase tracking-widest">Livestock Health Trend</p>
               </div>
-              <MiniBarChart data={[...livestockScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#854D0E" />
+              <MiniBarChart data={[...livestockScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#6F8E2E" />
             </div>
           )}
         </div>
@@ -392,7 +392,7 @@ export default function Dashboard() {
               <input value={cropInput} onChange={e => setCropInput(e.target.value)} placeholder="Kg" type="number" className={inputSmClass} />
               <button onClick={addCropYieldEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {cropYieldLog.length > 0 && <MiniBarChart data={chartData(cropYieldLog)} color="#854D0E" />}
+            {cropYieldLog.length > 0 && <MiniBarChart data={chartData(cropYieldLog)} color="#6F8E2E" />}
           </div>
 
           {/* Growth */}
@@ -409,7 +409,7 @@ export default function Dashboard() {
               <input value={growthInput} onChange={e => setGrowthInput(e.target.value)} placeholder="cm" type="number" className={inputSmClass} />
               <button onClick={addGrowthEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {growthLog.length > 0 && <MiniBarChart data={chartData(growthLog)} color="#F59E0B" />}
+            {growthLog.length > 0 && <MiniBarChart data={chartData(growthLog)} color="#E5A914" />}
           </div>
 
           {/* AI Optimizer */}
@@ -440,7 +440,7 @@ export default function Dashboard() {
                 <TrendingUp className="w-4 h-4 text-aqua animate-bounce" />
                 <p className="font-display text-[10px] sm:text-xs text-charcoalDark/50 dark:text-white/50 uppercase tracking-widest">Crop Health Trend</p>
               </div>
-              <MiniBarChart data={[...cropScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#854D0E" />
+              <MiniBarChart data={[...cropScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#6F8E2E" />
             </div>
           )}
         </div>
@@ -463,7 +463,7 @@ export default function Dashboard() {
               <input value={waterInput} onChange={e => setWaterInput(e.target.value)} placeholder="Litres" type="number" className={inputSmClass} />
               <button onClick={addWaterEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {waterLog.length > 0 && <MiniBarChart data={chartData(waterLog)} color="#EAB308" />}
+            {waterLog.length > 0 && <MiniBarChart data={chartData(waterLog)} color="#E5A914" />}
           </div>
 
           {/* Irrigation Log */}

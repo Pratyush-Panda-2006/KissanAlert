@@ -46,8 +46,8 @@
   }
   .scanning-line {
     height: 2px;
-    background: var(--coral-red, #EAB308);
-    box-shadow: 0 0 10px var(--coral-red, #EAB308);
+    background: var(--brand-green, #6F8E2E);
+    box-shadow: 0 0 10px var(--brand-green, #6F8E2E);
     width: 100%;
     position: absolute;
     top: 0;
@@ -78,20 +78,20 @@ select option {
   padding: 8px;
 }
 
-/* ===== Kisan Alert — Water Theme Utilities ===== */
+/* ===== Kisan Alert — Brand Logo Theme Utilities ===== */
 html {
   scroll-behavior: smooth;
 }
 
-/* Water-themed grid background */
+/* Brand logo themed grid background */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(234, 179, 8, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(234, 179, 8, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(111, 142, 46, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(111, 142, 46, 0.06) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Highlight bar with aqua accent */
+/* Highlight bar with logo colors accent */
 .highlight-bar {
   position: relative;
   display: inline-block;
@@ -100,7 +100,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #EAB308, #CA8A04);
+  background: linear-gradient(135deg, #6F8E2E, #E5A914);
   transform: rotate(-2deg);
   z-index: -1;
   border-radius: 4px;
@@ -113,16 +113,16 @@ html {
 }
 .landing-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(133, 96, 0, 0.15);
+  box-shadow: 0 20px 40px rgba(111, 142, 46, 0.15);
 }
 
 /* Step number hover effect */
 .step-num {
-  color: rgba(234, 179, 8, 0.15);
+  color: rgba(111, 142, 46, 0.15);
   transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .step-card:hover .step-num {
-  color: #EAB308;
+  color: #E5A914;
 }
 
 /* Water wave animation */
@@ -132,41 +132,41 @@ html {
   100% { d: path("M0,160L48,144C96,128,192,96,288,90.7C384,85,480,107,576,122.7C672,139,768,149,864,149.3C960,149,1056,139,1152,117.3C1248,96,1344,64,1392,48L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"); }
 }
 
-/* Water gradient backgrounds */
+/* Brand logo gradient backgrounds */
 .water-gradient {
-  background: linear-gradient(135deg, #854D0E 0%, #A16207 50%, #EAB308 100%);
+  background: linear-gradient(135deg, #1D2A0E 0%, #6F8E2E 50%, #E5A914 100%);
 }
 .water-gradient-light {
-  background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 50%, #FDE047 100%);
+  background: linear-gradient(135deg, #F4F8EE 0%, #E9F2D8 50%, #FCD87B 100%);
 }
 .water-gradient-subtle {
-  background: linear-gradient(135deg, rgba(234, 179, 8, 0.05) 0%, rgba(202, 138, 4, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(111, 142, 46, 0.05) 0%, rgba(229, 169, 20, 0.08) 100%);
 }
 
 /* Shimmer loading effect */
 .shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(234, 179, 8, 0.1) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(111, 142, 46, 0.1) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
 }
 
 /* Glassmorphism card */
 .glass-water {
-  background: rgba(133, 77, 14, 0.05);
+  background: rgba(111, 142, 46, 0.05);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(230, 168, 23, 0.15);
+  border: 1px solid rgba(111, 142, 46, 0.15);
   border-radius: 16px;
 }
 .dark .glass-water {
-  background: rgba(230, 168, 23, 0.08);
-  border-color: rgba(230, 168, 23, 0.2);
+  background: rgba(111, 142, 46, 0.08);
+  border-color: rgba(111, 142, 46, 0.2);
 }
 
-/* Water droplet decoration */
+/* Brand droplet decoration */
 .water-drop {
   width: 12px;
   height: 16px;
-  background: linear-gradient(180deg, #EAB308, #CA8A04);
+  background: linear-gradient(180deg, #6F8E2E, #E5A914);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   opacity: 0.6;
 }

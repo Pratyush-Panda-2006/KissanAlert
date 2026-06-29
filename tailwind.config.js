@@ -20,21 +20,21 @@ export default {
         charcoalDark: "#171e19",
         darkGray: "#272727",
         sageMuted: "#b7c6c2",
-        // Kisan Alert — Water-themed palette
-        ocean: "#0C4A6E",
-        oceanLight: "#0E5A85",
-        aqua: "#06B6D4",
-        aquaLight: "#22D3EE",
-        river: "#0EA5E9",
-        earth: "#78350F",
-        earthLight: "#92400E",
-        harvest: "#F59E0B",
-        harvestLight: "#FBBF24",
-        leaf: "#16A34A",
-        leafLight: "#22C55E",
-        alert: "#DC2626",
-        sky: "#E0F2FE",
-        skyDark: "#0284C7",
+        // Kisan Alert — Brand Logo Palette (Green & Wheat Gold)
+        ocean: "#1D2A0E",        // Deep forest green (dark background context)
+        oceanLight: "#2C3E17",   // Lighter deep forest green
+        aqua: "#6F8E2E",         // Logo leaf green (primary highlight)
+        aquaLight: "#89AF39",    // Light leaf green
+        river: "#E5A914",        // Logo wheat gold
+        earth: "#78350F",        // Fertile earth brown
+        earthLight: "#92400E",   // Light brown
+        harvest: "#E5A914",      // Wheat harvest gold
+        harvestLight: "#FCD87B", // Light harvest gold
+        leaf: "#6F8E2E",         // Logo leaf green
+        leafLight: "#89AF39",    // Light leaf green
+        alert: "#DC2626",        // Red alert
+        sky: "#F4F8EE",          // Logo off-white light background
+        skyDark: "#5B7825",      // Medium logo green
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
