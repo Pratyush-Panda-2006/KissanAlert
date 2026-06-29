@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Check, Droplets, Mail, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { ArrowRight, Check, Droplets, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../utils/supabaseClient';
 import { fetchAndRestoreUserData } from '../utils/userDataSync';
@@ -15,7 +15,6 @@ export default function Login() {
   
   // Form fields
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -36,16 +35,17 @@ export default function Login() {
     document.head.appendChild(style);
 
     // Prefill from remember me
-    const rememberedEmail = localStorage.getItem('SMART_AG_REMEMBER_EMAIL');
-    if (rememberedEmail) {
-      setEmail(rememberedEmail);
+    const rememberedName = localStorage.getItem('SMART_AG_REMEMBER_NAME');
+    if (rememberedName) {
+      setName(rememberedName);
       setRememberMe(true);
     }
 
     // Prefill from Landing Page waitlist if exists
     const landingEmail = localStorage.getItem('SMART_AG_EMAIL');
     if (landingEmail) {
-      setEmail(landingEmail);
+      // Use the part before @ as the username
+      setName(landingEmail.split('@')[0]);
       localStorage.removeItem('SMART_AG_EMAIL'); // consume it
     }
 
@@ -57,20 +57,27 @@ export default function Login() {
     setErrorMsg('');
     setLoading(true);
 
+    const cleanName = name.trim();
+    if (cleanName.length < 3) {
+      setErrorMsg('Name must be at least 3 characters long.');
+      setLoading(false);
+      return;
+    }
+
+    // Construct a unique dummy email address for Supabase auth
+    const safeEmail = encodeURIComponent(cleanName.toLowerCase().replace(/\s+/g, '_')) + '@kisanalert.app';
+
     try {
       if (isSignUp) {
-        // Validation
-        if (!name.trim()) throw new Error('Please enter your name.');
-        if (!email.trim()) throw new Error('Please enter your email.');
         if (password.length < 6) throw new Error('Password must be at least 6 characters.');
 
         // Sign Up with Supabase
         const { data, error } = await supabase.auth.signUp({
-          email: email.trim(),
+          email: safeEmail,
           password: password,
           options: {
             data: {
-              display_name: name.trim()
+              display_name: cleanName
             }
           }
         });
@@ -78,43 +85,38 @@ export default function Login() {
         if (error) throw error;
 
         if (data?.user) {
-          // If auto-logged in or account created
-          const displayName = data.user.user_metadata?.display_name || name.trim();
-          localStorage.setItem('SMART_AG_USER', displayName);
+          localStorage.setItem('SMART_AG_USER', cleanName);
           
           if (rememberMe) {
-            localStorage.setItem('SMART_AG_REMEMBER_EMAIL', email.trim());
+            localStorage.setItem('SMART_AG_REMEMBER_NAME', cleanName);
           } else {
-            localStorage.removeItem('SMART_AG_REMEMBER_EMAIL');
+            localStorage.removeItem('SMART_AG_REMEMBER_NAME');
           }
 
-          // Trigger empty/default sync for new user
           navigate('/dashboard');
         } else {
-          setErrorMsg('Registration successful! Please check your email for confirmation.');
+          setErrorMsg('Account created successfully! You can now log in.');
         }
 
       } else {
-        // Validation
-        if (!email.trim()) throw new Error('Please enter your email.');
         if (!password) throw new Error('Please enter your password.');
 
         // Sign In with Supabase
         const { data, error } = await supabase.auth.signInWithPassword({
-          email: email.trim(),
+          email: safeEmail,
           password: password
         });
 
         if (error) throw error;
 
         if (data?.user) {
-          const displayName = data.user.user_metadata?.display_name || data.user.email.split('@')[0];
+          const displayName = data.user.user_metadata?.display_name || cleanName;
           localStorage.setItem('SMART_AG_USER', displayName);
           
           if (rememberMe) {
-            localStorage.setItem('SMART_AG_REMEMBER_EMAIL', email.trim());
+            localStorage.setItem('SMART_AG_REMEMBER_NAME', cleanName);
           } else {
-            localStorage.removeItem('SMART_AG_REMEMBER_EMAIL');
+            localStorage.removeItem('SMART_AG_REMEMBER_NAME');
           }
 
           // Fetch and restore database sync data
@@ -124,7 +126,17 @@ export default function Login() {
         }
       }
     } catch (err) {
-      setErrorMsg(err.message || 'An error occurred during authentication.');
+      let friendlyMessage = err.message || 'An error occurred during authentication.';
+      if (
+        friendlyMessage.toLowerCase().includes('already registered') || 
+        friendlyMessage.toLowerCase().includes('already exists') ||
+        friendlyMessage.toLowerCase().includes('email_exists')
+      ) {
+        friendlyMessage = 'This name is already registered. Please choose a different name.';
+      } else if (friendlyMessage.toLowerCase().includes('invalid login credentials')) {
+        friendlyMessage = 'Incorrect name or password. Please try again.';
+      }
+      setErrorMsg(friendlyMessage);
     } finally {
       setLoading(false);
     }
@@ -180,7 +192,7 @@ export default function Login() {
             </h1>
             <p className="text-slate-500 font-normal text-[14px] sm:text-[16px] mt-3">
               {isSignUp 
-                ? 'Register now to sync your agricultural data across all devices.' 
+                ? 'Register now using your name and password to get started.' 
                 : 'Smart Water, Crop & Advisory System for Indian farmers.'}
             </p>
           </div>
@@ -193,37 +205,18 @@ export default function Login() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-[24px]">
-            {isSignUp && (
-              <div className="relative group">
-                <label className="text-[12px] font-semibold text-slate-500 uppercase tracking-[0.1em] block mb-1">
-                  Full Name
-                </label>
-                <div className="flex items-center border-b-2 border-[#F1F5F9] focus-within:border-[#6F8E2E] transition-colors py-1">
-                  <User className="w-5 h-5 text-slate-400 mr-2.5 shrink-0" />
-                  <input 
-                    type="text" 
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your full name"
-                    className="w-full bg-transparent text-[16px] text-[#111827] py-1 outline-none placeholder-slate-300"
-                  />
-                </div>
-              </div>
-            )}
-
             <div className="relative group">
               <label className="text-[12px] font-semibold text-slate-500 uppercase tracking-[0.1em] block mb-1">
-                Email Address
+                Your Name
               </label>
               <div className="flex items-center border-b-2 border-[#F1F5F9] focus-within:border-[#6F8E2E] transition-colors py-1">
-                <Mail className="w-5 h-5 text-slate-400 mr-2.5 shrink-0" />
+                <User className="w-5 h-5 text-slate-400 mr-2.5 shrink-0" />
                 <input 
-                  type="email" 
+                  type="text" 
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@example.com"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
                   className="w-full bg-transparent text-[16px] text-[#111827] py-1 outline-none placeholder-slate-300"
                 />
               </div>
@@ -240,7 +233,7 @@ export default function Login() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Min. 6 characters"
+                  placeholder={isSignUp ? "Min. 6 characters" : "Enter your password"}
                   className="w-full bg-transparent text-[16px] text-[#111827] py-1 outline-none placeholder-slate-300"
                 />
                 <button 
@@ -270,10 +263,6 @@ export default function Login() {
                 </div>
                 <span className="text-[14px] text-slate-500 font-medium select-none">Remember me</span>
               </label>
-              
-              <button type="button" className="text-[14px] text-slate-500 hover:text-[#6F8E2E] font-medium transition-colors">
-                Need help?
-              </button>
             </div>
 
             <button 

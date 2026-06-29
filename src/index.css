@@ -95,6 +95,7 @@ html {
 .highlight-bar {
   position: relative;
   display: inline-block;
+  isolation: isolate; /* Create new stacking context so ::before renders behind text but in front of page bg */
 }
 .highlight-bar::before {
   content: '';

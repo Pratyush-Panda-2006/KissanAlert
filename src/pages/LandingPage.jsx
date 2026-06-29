@@ -150,7 +150,7 @@ export default function LandingPage() {
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Kissan Alert Logo" className="w-12 h-12 object-contain rounded-xl" />
+            <img src="/logo.png" alt="Kissan Alert Logo" className="w-16 h-16 object-contain rounded-xl" />
             <span className="font-display text-2xl uppercase tracking-normal text-charcoalDark">
               Kissan<span className="text-aqua">Alert</span>
             </span>
@@ -242,7 +242,7 @@ export default function LandingPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase leading-[0.9] mb-6 tracking-normal">
+          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase leading-[0.9] mb-6 tracking-normal text-center w-full">
             SMART WATER{' '}
             <br className="hidden sm:block" />
             HEALTHY{' '}
@@ -353,9 +353,9 @@ export default function LandingPage() {
 
       {/* ═══════ BENTO FEATURE GRID ═══════ */}
       <section id="features" className="px-6 lg:px-10 py-16 md:py-28 max-w-6xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="font-body text-xs font-medium uppercase tracking-widest text-charcoalDark/50 mb-3">EVERYTHING YOU NEED</p>
-          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.9]">
+        <div className="text-center mb-12 md:mb-16 flex flex-col items-center justify-center">
+          <p className="font-body text-xs font-medium uppercase tracking-widest text-charcoalDark/50 mb-3 text-center">EVERYTHING YOU NEED</p>
+          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.9] text-center w-full">
             POWERFUL <span className="highlight-bar px-2 text-white">FEATURES</span>
           </h2>
         </div>
@@ -435,10 +435,10 @@ export default function LandingPage() {
 
       {/* ═══════ SOCIAL PROOF / TESTIMONIALS ═══════ */}
       <section id="testimonials" className="px-6 lg:px-10 py-16 md:py-24 max-w-6xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="font-body text-xs font-medium uppercase tracking-widest text-charcoalDark/50 mb-3">TRUSTED BY FARMERS</p>
-          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.9]">
-            REAL <span className="highlight-bar px-2 text-white">RESULTS</span>
+        <div className="text-center mb-12 md:mb-16 flex flex-col items-center justify-center">
+          <p className="font-body text-xs font-medium uppercase tracking-widest text-charcoalDark/50 mb-3 text-center">TRUSTED BY FARMERS</p>
+          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.9] text-center w-full text-charcoalDark dark:text-white">
+            REAL RESULTS
           </h2>
         </div>
 
