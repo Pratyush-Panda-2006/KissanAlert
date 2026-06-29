@@ -55,7 +55,7 @@ export default function CameraUpload() {
   // Handle exiting scan
   const handleExit = () => {
     stopCamera();
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const processImageBuffer = async (base64Data, rawDataUrl) => {

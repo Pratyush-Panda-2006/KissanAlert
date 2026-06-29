@@ -232,7 +232,7 @@ Provide a SMART IRRIGATION ADVISORY with:
 4. 🌱 CROP-SPECIFIC TIPS: If crops are identified, give specific water needs for those crops at their growth stage
 
 Format with clear sections and emojis. Be concise but actionable.
-Respond in ${userLang}. Keep each section to 2-3 lines max.`;
+CRITICAL INSTRUCTION: You MUST write the ENTIRE response (all text, titles, warnings, and schedules) in the language: ${userLang}. Do NOT use English under any circumstances except for standard measurements or units. Translate everything. Keep each section to 2-3 lines max.`;
 
       const modelNames = ['gemini-2.5-flash', 'gemini-1.5-flash'];
       let responseText = '';
@@ -285,7 +285,7 @@ Provide 3-4 SHORT, practical smart alerts combining weather conditions with the 
 Format each alert as: [EMOJI] [Alert Title]: [Brief actionable advice]
 Be specific to their crops/animals. If no scans, give general seasonal advice.
 Include at least one water management alert.
-Respond in ${userLang}. Keep it concise.`;
+CRITICAL INSTRUCTION: You MUST write the ENTIRE response in the language: ${userLang}. Do NOT use English under any circumstances. Translate everything, including any titles and emojis labels. Keep it concise.`;
 
       const modelNames = ['gemini-2.5-flash', 'gemini-1.5-flash'];
       let responseText = '';

@@ -7,7 +7,6 @@ import CustomSelect from '../components/CustomSelect';
 export default function Profile() {
   const [apiKey, setApiKey] = useState('');
   const [username, setUsername] = useState('');
-  const [phone, setPhone] = useState('');
   const [language, setLanguage] = useState('English');
   const [farmType, setFarmType] = useState('Irrigated');
   const [waterSource, setWaterSource] = useState('Well');
@@ -18,9 +17,6 @@ export default function Profile() {
   useEffect(() => {
     const storedUser = localStorage.getItem('SMART_AG_USER');
     if (storedUser) setUsername(storedUser);
-
-    const storedPhone = localStorage.getItem('SMART_AG_PHONE');
-    if (storedPhone) setPhone(storedPhone);
 
     const storedKey = localStorage.getItem('GEMINI_API_KEY');
     if (storedKey) setApiKey(storedKey);
@@ -41,7 +37,6 @@ export default function Profile() {
 
   const handleSave = () => {
     localStorage.setItem('SMART_AG_USER', username);
-    localStorage.setItem('SMART_AG_PHONE', phone);
     localStorage.setItem('GEMINI_API_KEY', apiKey);
     localStorage.setItem('SMART_AG_FARM_TYPE', farmType);
     localStorage.setItem('SMART_AG_WATER_SOURCE', waterSource);
@@ -86,13 +81,6 @@ export default function Profile() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Name" 
-            className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white placeholder-charcoalDark/30 outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-charcoalDark dark:focus:border-white transition-colors"
-          />
-          <input 
-            type="tel" 
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Phone Number" 
             className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white placeholder-charcoalDark/30 outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-charcoalDark dark:focus:border-white transition-colors"
           />
         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TrendingUp, Activity, AlertTriangle, Image as ImageIcon, X, Trash2, Droplets, CloudRain, MapPin, ChevronRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { TrendingUp, Activity, AlertTriangle, Image as ImageIcon, X, Trash2, Droplets, CloudRain, MapPin, ChevronRight, ArrowLeft } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import { getTranslation } from '../utils/i18n';
 import ExportShare from '../components/ExportShare';
 
@@ -75,6 +75,12 @@ export default function Home() {
       <div className="absolute top-24 left-[5%] w-3 h-4 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-aqua/15 animate-droplet pointer-events-none" />
       <div className="absolute top-48 right-[10%] w-4 h-5 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-river/10 animate-droplet pointer-events-none" style={{ animationDelay: '1s' }} />
       <div className="absolute bottom-40 left-[8%] w-3 h-4 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-aqua/10 animate-droplet pointer-events-none" style={{ animationDelay: '1.5s' }} />
+
+      <div className="relative z-10 pt-4 mb-2">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-sage hover:text-aqua transition-colors">
+          <ArrowLeft className="w-4 h-4" /> Back to Home
+        </Link>
+      </div>
 
       <header className="flex flex-col items-start text-left mb-8 mt-2 relative z-10">
         <div className="inline-flex items-center gap-2 bg-ocean/5 dark:bg-white/5 border border-ocean/10 dark:border-white/10 rounded-full px-4 py-1.5 mb-3">
