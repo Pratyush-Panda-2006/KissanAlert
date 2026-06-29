@@ -11,7 +11,7 @@ export const LANGUAGES = [
   'ଓଡ଼ିଆ (Odia)',
   'മലയാളം (Malayalam)',
   'ਪੰਜਾਬੀ (Punjabi)',
-  'অসমীয়া (Assamese)',
+  'অસમীয়া (Assamese)',
   'मैथिली (Maithili)',
   'سنڌي (Sindhi)',
   'संस्कृतम् (Sanskrit)',
@@ -22,7 +22,7 @@ export const LANGUAGES = [
   'বোড়ো (Bodo)',
   'डोगरी (Dogri)',
   'سنتالی (Santali)',
-  'కాశ్మీరి (Kashmiri)',
+  'ಕಾಶ್ਮੀರಿ (Kashmiri)',
 ];
 
 // Get the language name for Gemini API (just the language name in English)
@@ -33,10 +33,10 @@ export const getLangForAI = (displayLang) => {
 };
 
 // UI translations dictionary - covers all UI strings
-// For languages not in this dictionary, Gemini AI handles translation of scan results
 const translations = {
   'हिन्दी (Hindi)': {
     "Welcome to Kisan Alert": "किसान अलर्ट में आपका स्वागत है",
+    "Welcome to Kissan Alert": "किसान अलर्ट में आपका स्वागत है",
     "Welcome to FarmBuddy": "किसान अलर्ट में आपका स्वागत है",
     "Overall Health": "समग्र स्वास्थ्य",
     "Total Scans": "कुल स्कैन",
@@ -112,9 +112,99 @@ const translations = {
     "Water Source": "जल स्रोत",
     "Field": "खेत",
     "Nearest Water": "निकटतम जल स्रोत",
+    "Personal Info": "व्यक्तिगत जानकारी",
+    "Update your details": "अपनी जानकारी अपडेट करें",
+    "Phone Number": "फ़ोन नंबर",
+    "Save Preferences": "प्राथमिकताएं सहेजें",
+    "Kisan Alert Dashboard": "किसान अलर्ट डैशबोर्ड",
+    "Kissan Alert Dashboard": "किसान अलर्ट डैशबोर्ड",
+    "Crop Health": "फसल स्वास्थ्य",
+    "Livestock Health": "पशुधन स्वास्थ्य",
+    "Scans": "स्कैन",
+    "Total Water": "कुल जल",
+    "Alerts": "अलर्ट",
+    "Water": "पानी",
+    "Yield Logs & AI Planners": "उपज लॉग और एआई योजनाकार",
+    "Log crop yields, livestock health trends, and optimize water and soil resources": "फसल की उपज, पशुधन स्वास्थ्य प्रवृत्तियों को दर्ज करें, और जल और मिट्टी के संसाधनों को अनुकूलित करें",
+    "Kisan Alert Analytics": "किसान अलर्ट विश्लेषण",
+    "Analytics": "विश्लेषण",
+    "Water Usage": "जल उपयोग",
+    "Irrigation Log": "सिंचाई लॉग",
+    "Drip": "टपक सिंचाई (ड्रिप)",
+    "Flood": "बाढ़ सिंचाई",
+    "Sprinkler": "छिड़काव सिंचाई",
+    "Furrow": "नाली सिंचाई",
+    "Manual": "हाथ से",
+  },
+  'ଓଡ଼ିଆ (Odia)': {
+    "Welcome to Kisan Alert": "କିସାନ ଆଲର୍ଟ କୁ ସ୍ୱାଗତ",
+    "Welcome to Kissan Alert": "କିସାନ ଆଲର୍ଟ କୁ ସ୍ୱାଗତ",
+    "Welcome to FarmBuddy": "କିସାନ ଆଲର୍ଟ କୁ ସ୍ୱାଗତ",
+    "Overall Health": "ମୋଟ ସ୍ୱାସ୍ଥ୍ୟ",
+    "Total Scans": "ମୋଟ ସ୍କାନ",
+    "Issues Picked": "ସମସ୍ୟା",
+    "Recent": "ସାମ୍ପ୍ରତିକ",
+    "Crops": "ଫସଲ",
+    "Livestock": "ପଶୁଧନ",
+    "Good": "ଭଲ",
+    "Fair": "ମଧ୍ୟମ",
+    "Critical": "ସଙ୍କଟପୂର୍ଣ୍ଣ",
+    "Settings": "ସେଟିଂସ",
+    "Save Key": "ସେଭ୍ କରନ୍ତୁ",
+    "Saved!": "ସେଭ୍ ହେଲା!",
+    "Dashboard": "ଡ୍ୟାସବୋର୍ଡ",
+    "Weather": "ପାଣିପାଗ",
+    "Ask FarmBuddy": "ଫାର୍ମବଡ଼ିଙ୍କୁ ପଚାରନ୍ତୁ",
+    "Farm Map": "ଜମି ମ୍ୟାପ୍",
+    "Dark Mode": "ଡାର୍କ ମୋଡ୍",
+    "Clear All": "ସବୁ ହଟାନ୍ତୁ",
+    "Your Name": "ଆପଣଙ୍କ ନାମ",
+    "Get Started": "ଆରମ୍ଭ କରନ୍ତୁ",
+    "Farm & Irrigation Profile": "ଖେତ ଏବଂ ଜଳସେଚନ ପ୍ରୋଫାଇଲ",
+    "Water and crop setup": "ଜଳ ଏବଂ ଫସଲ ସେଟଅପ",
+    "Farm Type": "ଖେତର ପ୍ରକାର",
+    "Primary Water Source": "ପ୍ରାଥମିକ ଜଳ ଉତ୍ସ",
+    "Irrigated": "ଜଳସେଚିତ",
+    "Rainfed": "ବର୍ଷା ଆଧାରିତ",
+    "Mixed": "ମିଶ୍ରିତ",
+    "Well": "କୂଅ",
+    "Canal": "ନହର",
+    "River": "ନଦୀ",
+    "Borewell": "ବୋରୱେଲ",
+    "Pond": "ପୋଖରୀ",
+    "Other": "ଅନ୍ୟାନ୍ୟ",
+    "Gemini API Key": "ଜେମିନି ଏପିଆଇ କି",
+    "From Google AI Studio": "ଗୁଗଲ୍ ଏଆଇ ଷ୍ଟୁଡିଓରୁ",
+    "Primary Language": "ପ୍ରାଥମିକ ଭାଷା",
+    "Toggle dark/light theme": "ଡାର୍କ/ଲାଇଟ୍ ଥିମ୍ ବଦଳାନ୍ତୁ",
+    "Save Preferences": "ସେଭ୍ କରନ୍ତୁ",
+    "Personal Info": "ବ୍ୟକ୍ତିଗତ ସୂଚନା",
+    "Update your details": "ଆପଣଙ୍କର ବିବରଣୀ ଅପଡେଟ୍ କରନ୍ତୁ",
+    "Phone Number": "ଫୋନ୍ ନମ୍ବର",
+    "Configure your app preferences": "ଆପଣଙ୍କର ପସନ୍ଦ ସେଟ୍ କରନ୍ତୁ",
+    "Kisan Alert Dashboard": "କିସାନ ଆଲର୍ଟ ଡ୍ୟାସବୋର୍ଡ",
+    "Kissan Alert Dashboard": "କିସାନ ଆଲର୍ଟ ଡ୍ୟାସବୋର୍ଡ",
+    "Crop Health": "ଫସଲ ସ୍ୱାସ୍ଥ୍ୟ",
+    "Livestock Health": "ପଶୁ ସ୍ୱାସ୍ଥ୍ୟ",
+    "Scans": "ସ୍କାନ ଗୁଡ଼ିକ",
+    "Total Water": "ମୋଟ ଜଳ",
+    "Alerts": "ଆଲର୍ଟ",
+    "Water": "ଜଳ",
+    "Yield Logs & AI Planners": "ଫସଲ ଲଗ୍ ଏବଂ AI ପ୍ଲାନର୍",
+    "Log crop yields, livestock health trends, and optimize water and soil resources": "ଫସଲ ଅମଳ, ପଶୁ ସ୍ୱାସ୍ଥ୍ୟ ପ୍ରବୃତ୍ତି ଏବଂ ଜଳ ଓ ମୃତ୍ତିକା ଉତ୍ସକୁ ଅପ୍ଟିମାଇଜ୍ କରନ୍ତୁ",
+    "Kisan Alert Analytics": "କିସାନ ଆଲର୍ଟ ଆନାଲିଟିକ୍ସ",
+    "Analytics": "ଆନାଲିଟିକ୍ସ",
+    "Water Usage": "ଜଳ ବ୍ୟବହାର",
+    "Irrigation Log": "ଜଳସେଚନ ଲଗ୍",
+    "Drip": "ବୁନ୍ଦା ଜଳସେଚନ (ଡ୍ରିପ୍)",
+    "Flood": "ବନ୍ୟା ଜଳସେଚନ",
+    "Sprinkler": "ସ୍ପ୍ରିଙ୍କଲର",
+    "Furrow": "ଫୁରୋ",
+    "Manual": "ହସ୍ତକୃତ",
   },
   'বাংলা (Bengali)': {
-    "Welcome to FarmBuddy": "ফার্মবাডিতে স্বাগতম",
+    "Welcome to Kisan Alert": "কিসান অ্যালার্টে স্বাগতম",
+    "Welcome to FarmBuddy": "কিসান অ্যালার্টে স্বাগতম",
     "Overall Health": "সামগ্রিক স্বাস্থ্য",
     "Total Scans": "মোট স্ক্যান",
     "Issues Picked": "সমস্যা",
@@ -142,7 +232,8 @@ const translations = {
     "Get Started": "শুরু করুন",
   },
   'తెలుగు (Telugu)': {
-    "Welcome to FarmBuddy": "ఫార్మ్‌బడ్డీకి స్వాగతం",
+    "Welcome to Kisan Alert": "కిసాన్ అలర్ట్‌కు స్వాగతం",
+    "Welcome to FarmBuddy": "కిసాన్ అలర్ట్‌కు స్వాగతం",
     "Overall Health": "మొత్తం ఆరోగ్యం",
     "Total Scans": "మొత్తం స్కాన్లు",
     "Issues Picked": "సమస్యలు",
@@ -170,7 +261,8 @@ const translations = {
     "Get Started": "ప్రారంభించండి",
   },
   'मराठी (Marathi)': {
-    "Welcome to FarmBuddy": "फार्मबडीमध्ये स्वागत",
+    "Welcome to Kisan Alert": "किसान अलर्ट मध्ये आपले स्वागत",
+    "Welcome to FarmBuddy": "किसान अलर्ट मध्ये आपले स्वागत",
     "Overall Health": "एकूण आरोग्य",
     "Total Scans": "एकूण स्कॅन",
     "Issues Picked": "समस्या",
@@ -193,7 +285,8 @@ const translations = {
     "Get Started": "सुरू करा",
   },
   'தமிழ் (Tamil)': {
-    "Welcome to FarmBuddy": "ஃபார்ம்படிக்கு வரவேற்கிறோம்",
+    "Welcome to Kisan Alert": "கிசான் அலர்ட்டிற்கு வரவேற்கிறோம்",
+    "Welcome to FarmBuddy": "கிசான் அலர்ட்டிற்கு வரவேற்கிறோம்",
     "Overall Health": "மொத்த ஆரோக்கியம்",
     "Total Scans": "மொத்த ஸ்கேன்",
     "Issues Picked": "சிக்கல்கள்",
@@ -219,12 +312,13 @@ const translations = {
     "Your Name": "உங்கள் பெயர்",
     "Get Started": "தொடங்குங்கள்",
   },
-  ' Gujarat (Gujarati)': {
-    "Welcome to FarmBuddy": "ફાર્મબડીમાં આપનું સ્વાગત છે",
+  'ગુજરાતી (Gujarati)': {
+    "Welcome to Kisan Alert": "કિસાન એલર્ટમાં આપનું સ્વાગત છે",
+    "Welcome to FarmBuddy": "કિસાન એલર્ટમાં આપનું સ્વાગત છે",
     "Crops": "પાક",
     "Livestock": "પશુધન",
     "Settings": "સેટિંગ્સ",
-    "Dashboard": "ડેશબોર્ડ",
+    "Dashboard": "ડેશબોર્ড",
     "Weather": "હવામાન",
     "Farm Map": "ખેતરનો નકશો",
     "Dark Mode": "ડાર્ક મોડ",
@@ -232,66 +326,47 @@ const translations = {
     "Get Started": "શરૂ કરો",
   },
   'ಕನ್ನಡ (Kannada)': {
-    "Welcome to FarmBuddy": "ಫಾರ್ಮ್‌ಬಡ್ಡಿಗೆ ಸ್ವಾಗತ",
+    "Welcome to Kisan Alert": "ಕಿಸಾನ್ ಅಲರ್ಟ್‌ಗೆ ಸ್ವಾಗತ",
+    "Welcome to FarmBuddy": "ಕಿಸಾನ್ ಅಲರ್ಟ್‌ಗೆ ಸ್ವಾಗತ",
     "Crops": "ಬೆಳೆಗಳು",
     "Livestock": "ಜಾನುವಾರುಗಳು",
     "Settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
     "Dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
     "Weather": "ಹವಾಮಾನ",
     "Farm Map": "ಕೃಷಿ ನಕ್ಷೆ",
-    "Dark Mode": "ಡಾರ್ಕ್ ಮೋಡ್",
+    "Dark Mode": "ಡಾರ್ಕ್ ಮೋഡ്",
     "Your Name": "ನಿಮ್ಮ ಹೆಸರು",
     "Get Started": "ಪ್ರಾರಂಭಿಸಿ",
   },
-  'ଓଡ଼ିଆ (Odia)': {
-    "Welcome to FarmBuddy": "ଫାର୍ମବଡ଼ି କୁ ସ୍ୱାଗତ",
-    "Overall Health": "ମୋଟ ସ୍ୱାସ୍ଥ୍ୟ",
-    "Total Scans": "ମୋଟ ସ୍କାନ",
-    "Issues Picked": "ସମସ୍ୟା",
-    "Recent": "ସାମ୍ପ୍ରତିକ",
-    "Crops": "ଫସଲ",
-    "Livestock": "ପଶୁଧନ",
-    "Good": "ଭଲ",
-    "Fair": "ମଧ୍ୟମ",
-    "Critical": "ସଙ୍କଟପୂର୍ଣ୍ଣ",
-    "Settings": "ସେଟିଂସ",
-    "Save Key": "ସେଭ୍ କରନ୍ତୁ",
-    "Saved!": "ସେଭ୍ ହେଲା!",
-    "Dashboard": "ଡ୍ୟାସବୋର୍ଡ",
-    "Weather": "ପାଣିପାଗ",
-    "Ask FarmBuddy": "ଫାର୍ମବଡ଼ିଙ୍କୁ ପଚାରନ୍ତୁ",
-    "Farm Map": "ଜମି ମ୍ୟାପ୍",
-    "Dark Mode": "ଡାର୍କ ମୋଡ୍",
-    "Clear All": "ସବୁ ହଟାନ୍ତୁ",
-    "Your Name": "ଆପଣଙ୍କ ନାମ",
-    "Get Started": "ଆରମ୍ଭ କରନ୍ତୁ",
-  },
   'മലയാളം (Malayalam)': {
-    "Welcome to FarmBuddy": "ഫാം ബഡ്ഡിയിലേക്ക് സ്വാഗതം",
+    "Welcome to Kisan Alert": "കിസാൻ അലർട്ടിലേക്ക് സ്വാഗതം",
+    "Welcome to FarmBuddy": "കിസാൻ അലർട്ടിലേക്ക് സ്വാഗതം",
     "Crops": "വിളകൾ",
     "Livestock": "കന്നുകാലികൾ",
     "Settings": "ക്രമീകരണങ്ങൾ",
     "Dashboard": "ഡാഷ്‌ബോർഡ്",
     "Weather": "കാലാവസ്ഥ",
     "Farm Map": "കൃഷി ഭൂപടം",
-    "Dark Mode": "ഡാർക്ക്‌ മോഡ്",
+    "Dark Mode": "ಡാർക്ക്‌ മോഡ്",
     "Your Name": "നിങ്ങളുടെ പേര്",
     "Get Started": "ആരംഭിക്കുക",
   },
   'ਪੰਜਾਬੀ (Punjabi)': {
-    "Welcome to FarmBuddy": "ਫਾਰਮਬੱਡੀ ਵਿੱਚ ਸੁਆਗਤ ਹੈ",
+    "Welcome to Kisan Alert": "ਕਿਸਾਨ ਅਲਰਟ ਵਿੱਚ ਸੁਆਗਤ ਹੈ",
+    "Welcome to FarmBuddy": "ਕਿਸਾਨ ਅਲਰਟ ਵਿੱਚ ਸੁਆਗਤ ਹੈ",
     "Crops": "ਫ਼ਸਲਾਂ",
     "Livestock": "ਪਸ਼ੂ ਧਨ",
     "Settings": "ਸੈਟਿੰਗਜ਼",
-    "Dashboard": "ਡੈਸ਼ਬੋਰਡ",
+    "Dashboard": "ਡੈਸ਼ਬੋਰڈ",
     "Weather": "ਮੌਸਮ",
     "Farm Map": "ਖੇਤ ਦਾ ਨਕਸ਼ਾ",
-    "Dark Mode": "ਡਾਰਕ ਮੋਡ",
+    "Dark Mode": "ਡਾਰਕ ਮੋଡ",
     "Your Name": "ਤੁਹਾਡਾ ਨਾਂ",
     "Get Started": "ਸ਼ੁਰੂ ਕਰੋ",
   },
   'اردو (Urdu)': {
-    "Welcome to FarmBuddy": "فارم بڈی میں خوش آمدید",
+    "Welcome to Kisan Alert": "کیسان الرٹ میں خوش آمدید",
+    "Welcome to FarmBuddy": "کیسان الرٹ میں خوش آمدید",
     "Crops": "فصلیں",
     "Livestock": "مویشی",
     "Settings": "ترتیبات",
@@ -304,8 +379,68 @@ const translations = {
   },
 };
 
+// Map to track in-progress background translations to avoid duplicates
+let isTranslating = {};
+
+const translateWithGemini = async (text, userLang, apiKey) => {
+  const cacheKey = `kisanalert_translations_${userLang}`;
+  const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+  if (cache[text]) return;
+
+  const cacheId = `${userLang}:${text}`;
+  if (isTranslating[cacheId]) return;
+  isTranslating[cacheId] = true;
+
+  try {
+    const prompt = `You are a professional agricultural translator. Translate the following short English user interface text into the Indian language "${userLang}". Keep the tone professional, friendly, and natural for Indian farmers. Do not write any explanations, code, or quotes. Just output the direct translation.
+English text: "${text}"`;
+
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+    
+    if (res.ok) {
+      const resData = await res.json();
+      const translatedText = resData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
+      if (translatedText) {
+        // Clean translation if it returned double quotes
+        const cleaned = translatedText.replace(/^["']|["']$/g, '');
+        cache[text] = cleaned;
+        localStorage.setItem(cacheKey, JSON.stringify(cache));
+        // Dispatch event to trigger state updates in pages
+        window.dispatchEvent(new Event('kisanalert_translation_updated'));
+      }
+    }
+  } catch (e) {
+    console.error('Gemini translate error:', e);
+  } finally {
+    delete isTranslating[cacheId];
+  }
+};
+
 export const getTranslation = (enString) => {
+  if (!enString) return '';
   const userLang = localStorage.getItem('SMART_AG_LANG') || 'English';
   if (userLang === 'English') return enString;
-  return translations[userLang]?.[enString] || enString;
+
+  // 1. Check static translations
+  const staticTranslation = translations[userLang]?.[enString];
+  if (staticTranslation) return staticTranslation;
+
+  // 2. Check dynamic translations cache
+  const cacheKey = `kisanalert_translations_${userLang}`;
+  const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+  if (cache[enString]) return cache[enString];
+
+  // 3. Fallback to Gemini if key exists
+  const apiKey = localStorage.getItem('GEMINI_API_KEY');
+  if (apiKey && apiKey.startsWith('AIza')) {
+    translateWithGemini(enString, userLang, apiKey);
+  }
+
+  return enString;
 };

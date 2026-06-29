@@ -4,6 +4,7 @@ import { Plus, Trash2, Loader2, MapPin, Leaf, AlertTriangle, Droplets, ChevronRi
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getTranslation } from '../utils/i18n';
+import CustomSelect from '../components/CustomSelect';
 
 // Fix leaflet default icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -274,19 +275,13 @@ export default function FarmMap() {
                 className="flex-1 bg-offWhite dark:bg-white/10 h-10 rounded-xl px-3 text-xs font-bold text-charcoal dark:text-white placeholder-sage/50 outline-none border border-sage/20 dark:border-white/10 focus:border-aqua transition-colors" 
               />
             ) : (
-              <select 
+              <CustomSelect 
                 value={waterSourceType} 
                 onChange={e => setWaterSourceType(e.target.value)} 
-                className="flex-1 bg-offWhite dark:bg-white/10 h-10 rounded-xl px-3 text-xs font-bold text-charcoal dark:text-white outline-none border border-sage/20 dark:border-white/10 focus:border-aqua transition-colors appearance-none"
-                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23171e19' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
-              >
-                <option value="Well">{t("Well")}</option>
-                <option value="Canal">{t("Canal")}</option>
-                <option value="River">{t("River")}</option>
-                <option value="Borewell">{t("Borewell")}</option>
-                <option value="Pond">{t("Pond")}</option>
-                <option value="Other">{t("Other")}</option>
-              </select>
+                options={['Well', 'Canal', 'River', 'Borewell', 'Pond', 'Other'].map(m => ({ value: m, label: t(m) || m }))}
+                selectClass="h-10 text-xs rounded-xl bg-offWhite dark:bg-white/10"
+                className="flex-1"
+              />
             )}
           </div>
           <button 

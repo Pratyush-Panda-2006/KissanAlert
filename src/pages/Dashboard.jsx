@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { TrendingUp, Milk, Weight, Wheat, AlertTriangle, Sparkles, Plus, Trash2, Loader2, Droplets } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getTranslation } from '../utils/i18n';
+import CustomSelect from '../components/CustomSelect';
 
 const STORAGE_KEYS = {
   MILK_YIELD: 'farmbuddy_milk_yield',
@@ -12,7 +13,7 @@ const STORAGE_KEYS = {
   IRRIGATION: 'kisanalert_irrigation_log',
 };
 
-function MiniBarChart({ data, maxVal, color = '#06B6D4', label = '' }) {
+function MiniBarChart({ data, maxVal, color = '#EAB308', label = '' }) {
   const max = maxVal || Math.max(...data.map(d => d.value), 1);
   return (
     <div className="flex items-end gap-1.5 h-32 mt-3">
@@ -309,7 +310,7 @@ export default function Dashboard() {
               <input value={milkInput} onChange={e => setMilkInput(e.target.value)} placeholder="Litres" type="number" className={inputSmClass} />
               <button onClick={addMilkEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {milkLog.length > 0 && <MiniBarChart data={chartData(milkLog)} color="#0C4A6E" />}
+            {milkLog.length > 0 && <MiniBarChart data={chartData(milkLog)} color="#854D0E" />}
           </div>
 
           {/* Weight */}
@@ -357,7 +358,7 @@ export default function Dashboard() {
                 <TrendingUp className="w-4 h-4 text-aqua animate-bounce" />
                 <p className="font-display text-[10px] sm:text-xs text-charcoalDark/50 dark:text-white/50 uppercase tracking-widest">Livestock Health Trend</p>
               </div>
-              <MiniBarChart data={[...livestockScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#0C4A6E" />
+              <MiniBarChart data={[...livestockScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#854D0E" />
             </div>
           )}
         </div>
@@ -391,7 +392,7 @@ export default function Dashboard() {
               <input value={cropInput} onChange={e => setCropInput(e.target.value)} placeholder="Kg" type="number" className={inputSmClass} />
               <button onClick={addCropYieldEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {cropYieldLog.length > 0 && <MiniBarChart data={chartData(cropYieldLog)} color="#0C4A6E" />}
+            {cropYieldLog.length > 0 && <MiniBarChart data={chartData(cropYieldLog)} color="#854D0E" />}
           </div>
 
           {/* Growth */}
@@ -439,7 +440,7 @@ export default function Dashboard() {
                 <TrendingUp className="w-4 h-4 text-aqua animate-bounce" />
                 <p className="font-display text-[10px] sm:text-xs text-charcoalDark/50 dark:text-white/50 uppercase tracking-widest">Crop Health Trend</p>
               </div>
-              <MiniBarChart data={[...cropScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#0C4A6E" />
+              <MiniBarChart data={[...cropScans].reverse().slice(-7).map(s => ({ value: s.healthPercentage || 0, label: s.identity?.slice(0, 6) || '?' }))} maxVal={100} color="#854D0E" />
             </div>
           )}
         </div>
@@ -462,7 +463,7 @@ export default function Dashboard() {
               <input value={waterInput} onChange={e => setWaterInput(e.target.value)} placeholder="Litres" type="number" className={inputSmClass} />
               <button onClick={addWaterEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>
-            {waterLog.length > 0 && <MiniBarChart data={chartData(waterLog)} color="#06B6D4" />}
+            {waterLog.length > 0 && <MiniBarChart data={chartData(waterLog)} color="#EAB308" />}
           </div>
 
           {/* Irrigation Log */}
@@ -475,9 +476,13 @@ export default function Dashboard() {
               {irrigationLog.length > 0 && <button onClick={() => clearLog(STORAGE_KEYS.IRRIGATION, setIrrigationLog)} className="text-alert/80 hover:text-alert p-2 rounded-lg hover:bg-alert/10 transition-colors"><Trash2 className="w-4 h-4" /></button>}
             </div>
             <div className="flex gap-2 mt-4">
-              <select value={irrigationMethod} onChange={e => setIrrigationMethod(e.target.value)} className={inputClass + " appearance-none"} style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23171e19' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}>
-                {['Drip', 'Flood', 'Sprinkler', 'Furrow', 'Manual'].map(m => <option key={m} value={m}>{m}</option>)}
-              </select>
+              <CustomSelect
+                value={irrigationMethod}
+                onChange={e => setIrrigationMethod(e.target.value)}
+                options={['Drip', 'Flood', 'Sprinkler', 'Furrow', 'Manual'].map(m => ({ value: m, label: t(m) || m }))}
+                selectClass="h-12"
+                className="flex-1"
+              />
               <input value={irrigationDuration} onChange={e => setIrrigationDuration(e.target.value)} placeholder="Min" type="number" className={inputSmClass} />
               <button onClick={addIrrigationEntry} className="h-12 w-12 bg-gradient-to-tr from-ocean to-river rounded-lg flex items-center justify-center text-white shrink-0 active:scale-95 transition-transform"><Plus className="w-5 h-5" /></button>
             </div>

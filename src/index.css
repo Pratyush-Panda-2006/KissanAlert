@@ -46,8 +46,8 @@
   }
   .scanning-line {
     height: 2px;
-    background: var(--coral-red, #06B6D4);
-    box-shadow: 0 0 10px var(--coral-red, #06B6D4);
+    background: var(--coral-red, #EAB308);
+    box-shadow: 0 0 10px var(--coral-red, #EAB308);
     width: 100%;
     position: absolute;
     top: 0;
@@ -86,8 +86,8 @@ html {
 /* Water-themed grid background */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(6, 182, 212, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 182, 212, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(234, 179, 8, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(234, 179, 8, 0.06) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -100,7 +100,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #06B6D4, #0EA5E9);
+  background: linear-gradient(135deg, #EAB308, #CA8A04);
   transform: rotate(-2deg);
   z-index: -1;
   border-radius: 4px;
@@ -113,16 +113,16 @@ html {
 }
 .landing-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(12, 74, 110, 0.15);
+  box-shadow: 0 20px 40px rgba(133, 96, 0, 0.15);
 }
 
 /* Step number hover effect */
 .step-num {
-  color: rgba(6, 182, 212, 0.15);
+  color: rgba(234, 179, 8, 0.15);
   transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .step-card:hover .step-num {
-  color: #06B6D4;
+  color: #EAB308;
 }
 
 /* Water wave animation */
@@ -134,39 +134,39 @@ html {
 
 /* Water gradient backgrounds */
 .water-gradient {
-  background: linear-gradient(135deg, #0C4A6E 0%, #0E7490 50%, #06B6D4 100%);
+  background: linear-gradient(135deg, #854D0E 0%, #A16207 50%, #EAB308 100%);
 }
 .water-gradient-light {
-  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 50%, #7DD3FC 100%);
+  background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 50%, #FDE047 100%);
 }
 .water-gradient-subtle {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(14, 165, 233, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.05) 0%, rgba(202, 138, 4, 0.08) 100%);
 }
 
 /* Shimmer loading effect */
 .shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.1) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(234, 179, 8, 0.1) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
 }
 
 /* Glassmorphism card */
 .glass-water {
-  background: rgba(12, 74, 110, 0.05);
+  background: rgba(133, 77, 14, 0.05);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(6, 182, 212, 0.15);
+  border: 1px solid rgba(230, 168, 23, 0.15);
   border-radius: 16px;
 }
 .dark .glass-water {
-  background: rgba(6, 182, 212, 0.08);
-  border-color: rgba(6, 182, 212, 0.2);
+  background: rgba(230, 168, 23, 0.08);
+  border-color: rgba(230, 168, 23, 0.2);
 }
 
 /* Water droplet decoration */
 .water-drop {
   width: 12px;
   height: 16px;
-  background: linear-gradient(180deg, #06B6D4, #0EA5E9);
+  background: linear-gradient(180deg, #EAB308, #CA8A04);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   opacity: 0.6;
 }

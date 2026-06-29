@@ -86,10 +86,30 @@ export default function Weather() {
 
   useEffect(() => { fetchWeather(); }, []);
 
-  // ─── Fetch: try IndianAPI first, fall back to open-meteo ───
   const fetchWeather = async (manualCity) => {
-    setLoading(true);
+    // 0. Try loading from cache first
+    const cachedData = localStorage.getItem('kisanalert_cached_weather');
+    const cachedCity = localStorage.getItem('kisanalert_cached_weather_city');
+    const cachedTime = localStorage.getItem('kisanalert_cached_weather_time');
+    
+    let useCache = false;
+    if (cachedData && cachedCity && cachedTime && !manualCity) {
+      const parsedTime = parseInt(cachedTime, 10);
+      const now = Date.now();
+      // If cache is less than 30 minutes old
+      if (now - parsedTime < 30 * 60 * 1000) {
+        setWeather(JSON.parse(cachedData));
+        setLocationName(cachedCity);
+        setLoading(false);
+        useCache = true;
+      }
+    }
+
+    if (!useCache) {
+      setLoading(true);
+    }
     setError(null);
+
     try {
       let city = manualCity;
       let lat, lon;
@@ -98,15 +118,17 @@ export default function Weather() {
       if (!city) {
         try {
           const pos = await new Promise((resolve, reject) =>
-            navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000 })
+            navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 3000 })
           );
           lat = pos.coords.latitude;
           lon = pos.coords.longitude;
-          const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+          const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`, {
+            headers: { 'User-Agent': 'KissanAlert/1.0' }
+          });
           const geoData = await geoRes.json();
           city = geoData.address?.city || geoData.address?.town || geoData.address?.village || geoData.address?.state_district || geoData.address?.county || 'Delhi';
         } catch {
-          city = 'Delhi';
+          city = cachedCity || 'Delhi';
         }
       }
 
@@ -132,7 +154,9 @@ export default function Weather() {
       if (!normalized) {
         if (!lat || !lon) {
           try {
-            const geoRes = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)},India&format=json&limit=1`);
+            const geoRes = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)},India&format=json&limit=1`, {
+              headers: { 'User-Agent': 'KissanAlert/1.0' }
+            });
             const geoData = await geoRes.json();
             if (geoData.length > 0) { lat = geoData[0].lat; lon = geoData[0].lon; }
             else { lat = 28.6139; lon = 77.2090; } // Delhi fallback
@@ -146,11 +170,16 @@ export default function Weather() {
       }
 
       setWeather(normalized);
+      localStorage.setItem('kisanalert_cached_weather', JSON.stringify(normalized));
+      localStorage.setItem('kisanalert_cached_weather_city', city);
+      localStorage.setItem('kisanalert_cached_weather_time', Date.now().toString());
     } catch (err) {
       console.error('Weather error:', err);
-      setError(err.message?.includes('denied')
-        ? 'Location permission denied. Please enter a city name below.'
-        : 'Failed to fetch weather data. Check your connection or try a different city.');
+      if (!localStorage.getItem('kisanalert_cached_weather')) {
+        setError(err.message?.includes('denied')
+          ? 'Location permission denied. Please enter a city name below.'
+          : 'Failed to fetch weather data. Check your connection or try a different city.');
+      }
     } finally {
       setLoading(false);
     }

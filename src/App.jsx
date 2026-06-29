@@ -11,6 +11,9 @@ import Weather from './pages/Weather';
 import ChatAssistant from './pages/ChatAssistant';
 import FarmMap from './pages/FarmMap';
 import LandingPage from './pages/LandingPage';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+import Security from './pages/Security';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/security" element={<Security />} />
           <Route element={<Layout />}>
             <Route path="/dashboard" element={<Home />} />
             <Route path="/camera" element={<CameraUpload />} />

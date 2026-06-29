@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Key, Save, CheckCircle2, Languages, Moon, Sun, User2, Droplets } from 'lucide-react';
 import { getTranslation, LANGUAGES } from '../utils/i18n';
 import { useTheme } from '../utils/ThemeContext';
+import CustomSelect from '../components/CustomSelect';
 
 export default function Profile() {
   const [apiKey, setApiKey] = useState('');
@@ -107,35 +108,33 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
           <div>
-            <label className="block text-[10px] uppercase font-bold text-sage mb-1.5">{t("Farm Type")}</label>
-            <select 
+            <CustomSelect 
               value={farmType}
               onChange={(e) => setFarmType(e.target.value)}
-              className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-aqua transition-colors appearance-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23171e19' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
-            >
-              <option value="Irrigated">{t("Irrigated") || "Irrigated"}</option>
-              <option value="Rainfed">{t("Rainfed") || "Rainfed"}</option>
-              <option value="Mixed">{t("Mixed") || "Mixed"}</option>
-            </select>
+              label={t("Farm Type")}
+              options={[
+                { value: 'Irrigated', label: t("Irrigated") || "Irrigated" },
+                { value: 'Rainfed', label: t("Rainfed") || "Rainfed" },
+                { value: 'Mixed', label: t("Mixed") || "Mixed" }
+              ]}
+            />
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase font-bold text-sage mb-1.5">{t("Primary Water Source")}</label>
-            <select 
+            <CustomSelect 
               value={waterSource}
               onChange={(e) => setWaterSource(e.target.value)}
-              className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-aqua transition-colors appearance-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23171e19' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
-            >
-              <option value="Well">{t("Well") || "Well"}</option>
-              <option value="Canal">{t("Canal") || "Canal"}</option>
-              <option value="River">{t("River") || "River"}</option>
-              <option value="Borewell">{t("Borewell") || "Borewell"}</option>
-              <option value="Rainfed">{t("Rainfed") || "Rainfed"}</option>
-            </select>
+              label={t("Primary Water Source")}
+              options={[
+                { value: 'Well', label: t("Well") || "Well" },
+                { value: 'Canal', label: t("Canal") || "Canal" },
+                { value: 'River', label: t("River") || "River" },
+                { value: 'Borewell', label: t("Borewell") || "Borewell" },
+                { value: 'Rainfed', label: t("Rainfed") || "Rainfed" }
+              ]}
+            />
           </div>
         </div>
 
@@ -177,18 +176,11 @@ export default function Profile() {
         </div>
 
         <div className="space-y-3 mb-8 relative">
-          <select 
+          <CustomSelect 
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-aqua transition-colors appearance-none"
-            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23171e19' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
-          >
-            {LANGUAGES.map(lang => (
-              <option key={lang} value={lang} className="bg-white dark:bg-charcoalDark text-charcoalDark dark:text-white py-2">
-                {lang}
-              </option>
-            ))}
-          </select>
+            options={LANGUAGES.map(lang => ({ value: lang, label: lang }))}
+          />
         </div>
 
         {/* Dark Mode Section */}

@@ -150,11 +150,9 @@ export default function LandingPage() {
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-lg water-gradient flex items-center justify-center">
-              <Droplets className="w-5 h-5 text-white" />
-            </div>
+            <img src="/logo.png" alt="Kissan Alert Logo" className="w-9 h-9 object-contain rounded-lg" />
             <span className="font-display text-2xl uppercase tracking-normal text-charcoalDark">
-              Kisan<span className="text-aqua">Alert</span>
+              Kissan<span className="text-aqua">Alert</span>
             </span>
           </a>
 
@@ -577,11 +575,9 @@ export default function LandingPage() {
             {/* Logo */}
             <div>
               <a href="#" className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-lg water-gradient flex items-center justify-center">
-                  <Droplets className="w-4 h-4 text-white" />
-                </div>
+                <img src="/logo.png" alt="Kissan Alert Logo" className="w-8 h-8 object-contain rounded-lg bg-white/90 p-0.5" />
                 <span className="font-display text-2xl uppercase text-white">
-                  Kisan<span className="text-aqua">Alert</span>
+                  Kissan<span className="text-aqua">Alert</span>
                 </span>
               </a>
               <p className="font-body text-sm text-sageMuted/50 mt-3 max-w-xs">
@@ -594,25 +590,27 @@ export default function LandingPage() {
               <div>
                 <p className="font-display text-sm uppercase mb-4 text-sageMuted/50">Product</p>
                 <ul className="space-y-3">
-                  {['Features', 'Water Advisory', 'Crop Scanner', 'Languages'].map(l => (
-                    <li key={l}><a href="#" className="font-body text-sm text-white/50 hover:text-white transition-colors">{l}</a></li>
-                  ))}
+                  <li><a href="#features" className="font-body text-sm text-white/50 hover:text-white transition-colors">Features</a></li>
+                  <li><Link to="/weather" className="font-body text-sm text-white/50 hover:text-white transition-colors">Water Advisory</Link></li>
+                  <li><Link to="/camera" className="font-body text-sm text-white/50 hover:text-white transition-colors">Crop Scanner</Link></li>
+                  <li><Link to="/profile" className="font-body text-sm text-white/50 hover:text-white transition-colors">Languages</Link></li>
                 </ul>
               </div>
               <div>
                 <p className="font-display text-sm uppercase mb-4 text-sageMuted/50">Resources</p>
                 <ul className="space-y-3">
-                  {['About', 'Blog', 'FAQ', 'Contact'].map(l => (
-                    <li key={l}><a href="#" className="font-body text-sm text-white/50 hover:text-white transition-colors">{l}</a></li>
-                  ))}
+                  <li><a href="#how-it-works" className="font-body text-sm text-white/50 hover:text-white transition-colors">About</a></li>
+                  <li><a href="#testimonials" className="font-body text-sm text-white/50 hover:text-white transition-colors">Blog</a></li>
+                  <li><Link to="/chat" className="font-body text-sm text-white/50 hover:text-white transition-colors">FAQ</Link></li>
+                  <li><a href="https://www.linkedin.com/in/pratyush-panda2006" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-white/50 hover:text-white transition-colors">Contact</a></li>
                 </ul>
               </div>
               <div className="hidden sm:block">
                 <p className="font-display text-sm uppercase mb-4 text-sageMuted/50">Legal</p>
                 <ul className="space-y-3">
-                  {['Privacy', 'Terms', 'Security'].map(l => (
-                    <li key={l}><a href="#" className="font-body text-sm text-white/50 hover:text-white transition-colors">{l}</a></li>
-                  ))}
+                  <li><Link to="/privacy" className="font-body text-sm text-white/50 hover:text-white transition-colors">Privacy</Link></li>
+                  <li><Link to="/terms" className="font-body text-sm text-white/50 hover:text-white transition-colors">Terms</Link></li>
+                  <li><Link to="/security" className="font-body text-sm text-white/50 hover:text-white transition-colors">Security</Link></li>
                 </ul>
               </div>
             </div>
@@ -624,9 +622,9 @@ export default function LandingPage() {
               © 2026 Kisan Alert. All rights reserved.
             </p>
             <div className="flex gap-6">
-              {['Twitter', 'GitHub', 'LinkedIn'].map(s => (
-                <a key={s} href="#" className="font-body text-xs text-sageMuted/30 hover:text-white transition-colors">{s}</a>
-              ))}
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-sageMuted/30 hover:text-white transition-colors">Twitter</a>
+              <a href="https://github.com/Pratyush-Panda-2006" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-sageMuted/30 hover:text-white transition-colors">GitHub</a>
+              <a href="https://www.linkedin.com/in/pratyush-panda2006" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-sageMuted/30 hover:text-white transition-colors">LinkedIn</a>
             </div>
           </div>
         </div>
