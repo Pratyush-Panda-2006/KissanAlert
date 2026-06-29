@@ -1,0 +1,59 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../utils/supabaseClient';
+import { Droplets } from 'lucide-react';
+
+export default function AuthGuard({ children }) {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (mounted) {
+        if (!session) {
+          navigate('/login');
+        } else {
+          setLoading(false);
+        }
+      }
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (mounted) {
+        if (event === 'SIGNED_OUT') {
+          navigate('/login');
+        } else if (session) {
+          setLoading(false);
+        }
+      }
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, [navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-charcoalDark flex flex-col items-center justify-center text-white p-6 relative overflow-hidden">
+        {/* Floating background drop */}
+        <div className="absolute top-[30%] left-[20%] w-6 h-8 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-aqua/10 animate-pulse pointer-events-none" />
+        <div className="absolute bottom-[30%] right-[20%] w-8 h-10 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-river/10 animate-pulse pointer-events-none" />
+
+        <div className="relative z-10 text-center flex flex-col items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-white/5 backdrop-blur-md flex items-center justify-center border border-white/10 shadow-2xl animate-spin-slow">
+            <Droplets className="w-8 h-8 text-aqua animate-bounce" />
+          </div>
+          <p className="font-display uppercase tracking-widest text-xs text-sage mt-2">Checking Account...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return children;
+}

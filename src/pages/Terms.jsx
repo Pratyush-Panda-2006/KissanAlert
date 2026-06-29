@@ -33,14 +33,13 @@ export default function Terms() {
           </p>
         </section>
 
-        {/* ATTRIBUTION SECTION (MIDDLE OF TERMS) */}
-        <section className="space-y-4 font-body text-sm sm:text-base leading-relaxed bg-aqua/5 dark:bg-aqua/10 p-6 rounded-2xl border border-aqua/25 border-l-4 border-l-aqua">
-          <h2 className="font-display text-xl uppercase text-aqua">3. Intellectual Property Rights & Ownership</h2>
+        <section className="space-y-4 font-body text-sm sm:text-base leading-relaxed text-charcoalDark/80 dark:text-white/80">
+          <h2 className="font-display text-xl uppercase text-charcoalDark dark:text-white">3. Intellectual Property Rights & Ownership</h2>
           <p>
             The software, design structure, codebase, and layout of this website are the proprietary property of the developer. 
           </p>
-          <p className="font-bold text-charcoalDark dark:text-white border-y border-aqua/20 py-3 my-2">
-            Specifically, this website is made by Pratyush Panda (LinkedIn: <a href="https://www.linkedin.com/in/pratyush-panda2006" target="_blank" rel="noopener noreferrer" className="underline hover:text-aqua transition-colors">www.linkedin.com/in/pratyush-panda2006</a>), and without my permission none can say it's mine. All rights to Kissan Alert's primary source files, unique layouts, and code concepts are strictly reserved.
+          <p>
+            Specifically, this website is made by Pratyush Panda <a href="https://github.com/Pratyush-Panda-2006/KissanAlert" target="_blank" rel="noopener noreferrer" className="underline hover:text-aqua transition-colors">https://github.com/Pratyush-Panda-2006/KissanAlert</a>, and without my permission none can say it's mine. All rights to Kissan Alert's primary source files, unique layouts, and code concepts are strictly reserved.
           </p>
           <p>
             Unauthorized reproduction, redistribution, or misrepresentation of ownership of Kissan Alert's property will lead to immediate legal action under intellectual property regulations.

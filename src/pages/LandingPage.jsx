@@ -149,8 +149,8 @@ export default function LandingPage() {
       <nav className={`fixed top-0 left-0 right-0 h-20 z-50 flex items-center transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg shadow-sm' : 'bg-transparent'}`}>
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Kissan Alert Logo" className="w-9 h-9 object-contain rounded-lg" />
+          <a href="#" className="flex items-center gap-3">
+            <img src="/logo.png" alt="Kissan Alert Logo" className="w-12 h-12 object-contain rounded-xl" />
             <span className="font-display text-2xl uppercase tracking-normal text-charcoalDark">
               Kissan<span className="text-aqua">Alert</span>
             </span>

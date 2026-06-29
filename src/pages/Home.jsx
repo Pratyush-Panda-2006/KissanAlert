@@ -3,6 +3,7 @@ import { TrendingUp, Activity, AlertTriangle, Image as ImageIcon, X, Trash2, Dro
 import { useNavigate, Link } from 'react-router-dom';
 import { getTranslation } from '../utils/i18n';
 import ExportShare from '../components/ExportShare';
+import { syncUserData } from '../utils/userDataSync';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ export default function Home() {
     const updated = scans.filter(s => s.id !== scanId);
     setScans(updated);
     localStorage.setItem('smartAgHistory', JSON.stringify(updated));
+    syncUserData(); // Sync deletion to backend
     if (selectedScan?.id === scanId) setSelectedScan(null);
   };
 
@@ -67,6 +69,7 @@ export default function Home() {
     if (!window.confirm(t('Are you sure you want to delete all scans?'))) return;
     setScans([]);
     localStorage.setItem('smartAgHistory', '[]');
+    syncUserData(); // Sync deletion to backend
   };
 
   return (

@@ -5,6 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getTranslation } from '../utils/i18n';
 import CustomSelect from '../components/CustomSelect';
+import { syncUserData } from '../utils/userDataSync';
 
 // Fix leaflet default icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -75,6 +76,7 @@ export default function FarmMap() {
 
   useEffect(() => {
     localStorage.setItem('farmbuddy_fields', JSON.stringify(fields));
+    syncUserData(); // Sync map data to backend
   }, [fields]);
 
   const handleMapClick = (latlng) => {

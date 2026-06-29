@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Key, Save, CheckCircle2, Languages, Moon, Sun, User2, Droplets } from 'lucide-react';
+import { Key, Save, CheckCircle2, Languages, Moon, Sun, User2, Droplets, LogOut } from 'lucide-react';
 import { getTranslation, LANGUAGES } from '../utils/i18n';
 import { useTheme } from '../utils/ThemeContext';
 import CustomSelect from '../components/CustomSelect';
+import { supabase } from '../utils/supabaseClient';
+import { clearUserData, syncUserData } from '../utils/userDataSync';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
+  const navigate = useNavigate();
   const [apiKey, setApiKey] = useState('');
   const [username, setUsername] = useState('');
   const [language, setLanguage] = useState('English');
@@ -35,7 +39,7 @@ export default function Profile() {
     }
   }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     localStorage.setItem('SMART_AG_USER', username);
     localStorage.setItem('GEMINI_API_KEY', apiKey);
     localStorage.setItem('SMART_AG_FARM_TYPE', farmType);
@@ -44,13 +48,31 @@ export default function Profile() {
     setShowError(false);
     
     const currentLang = localStorage.getItem('SMART_AG_LANG');
+    let langChanged = false;
     if (currentLang !== language) {
       localStorage.setItem('SMART_AG_LANG', language);
-      window.location.reload();
+      langChanged = true;
     }
     
+    // Sync data to Supabase (async, background sync)
+    await syncUserData();
+
     setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    
+    if (langChanged) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      setTimeout(() => setSaved(false), 3000);
+    }
+  };
+
+  const handleLogout = async () => {
+    if (!window.confirm(t("Are you sure you want to log out?"))) return;
+    await supabase.auth.signOut();
+    clearUserData();
+    navigate('/login');
   };
 
   const t = getTranslation;
@@ -197,6 +219,16 @@ export default function Profile() {
         >
            {saved ? <><CheckCircle2 className="w-5 h-5 text-aqua" /> {t("Saved!")}</> : <><Save className="w-5 h-5 opacity-70" /> {t("Save Preferences")}</>}
         </button>
+
+        {/* Logout Button */}
+        <div className="border-t border-charcoalDark/10 dark:border-white/10 mt-6 pt-6">
+          <button 
+            onClick={handleLogout}
+            className="w-full h-14 bg-transparent border border-coralRed/30 hover:bg-coralRed/5 hover:border-coralRed/60 text-coralRed rounded-xl font-display text-sm sm:text-base uppercase tracking-widest flex items-center justify-center gap-3 active:scale-[0.98] transition-all"
+          >
+            <LogOut className="w-5 h-5 opacity-70" /> {t("Log Out") || "Log Out"}
+          </button>
+        </div>
       </div>
     </>
   );

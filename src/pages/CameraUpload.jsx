@@ -3,6 +3,7 @@ import { X, CheckCircle2, Camera, ImagePlus, AlertCircle, Droplets } from 'lucid
 import { useNavigate } from 'react-router-dom';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getLangForAI } from '../utils/i18n';
+import { syncUserData } from '../utils/userDataSync';
 
 export default function CameraUpload() {
   const navigate = useNavigate();
@@ -159,6 +160,9 @@ CRITICAL INSTRUCTION: Translate the values of 'identity', 'diagnosis', 'severity
       const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
       history.unshift(newScan);
       localStorage.setItem('smartAgHistory', JSON.stringify(history));
+      
+      // Sync scanned data with Supabase backend
+      syncUserData();
 
       setResult(newScan);
       setAnalyzing(false);
