@@ -167,20 +167,9 @@ export default function LandingPage() {
 
           {/* Right Side */}
           <div className="hidden md:flex items-center gap-4">
-            {isLoggedIn ? (
-              <Link to="/dashboard" className="water-gradient text-white font-body text-sm font-medium px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
-                Go to Dashboard
-              </Link>
-            ) : (
-              <>
-                <Link to="/login" className="font-body text-sm font-medium text-charcoalDark/70 hover:text-charcoalDark transition-colors">
-                  Login
-                </Link>
-                <Link to="/login" className="water-gradient text-white font-body text-sm font-medium px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
-                  Get Started
-                </Link>
-              </>
-            )}
+            <Link to="/dashboard" className="water-gradient text-white font-body text-sm font-medium px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
+              Go to Dashboard
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -204,18 +193,9 @@ export default function LandingPage() {
                 </a>
               ))}
               <hr className="border-charcoalDark/10" />
-              {isLoggedIn ? (
-                <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="water-gradient text-white font-body font-medium text-center px-6 py-3 rounded-full">
-                  Go to Dashboard
-                </Link>
-              ) : (
-                <>
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="font-body text-lg font-medium text-charcoalDark/70">Login</Link>
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="water-gradient text-white font-body font-medium text-center px-6 py-3 rounded-full">
-                    Get Started
-                  </Link>
-                </>
-              )}
+              <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="water-gradient text-white font-body font-medium text-center px-6 py-3 rounded-full">
+                Go to Dashboard
+              </Link>
             </div>
           </div>
         )}
@@ -255,39 +235,14 @@ export default function LandingPage() {
           </p>
 
           {/* CTA Buttons */}
-          {isLoggedIn ? (
-            <div className="max-w-xs mx-auto">
-              <Link
-                to="/dashboard"
-                className="w-full water-gradient text-white font-display text-xl px-8 py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-ocean/20"
-              >
-                GO TO DASHBOARD <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          ) : (
-            <div className="flex flex-col sm:flex-row items-center gap-3 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="w-full sm:flex-1 border border-charcoalDark/20 bg-white font-body text-base px-6 py-4 rounded-xl focus:outline-none focus:border-ocean/50 transition-colors"
-              />
-              <button
-                onClick={() => {
-                  if (email.trim()) {
-                    localStorage.setItem('SMART_AG_EMAIL', email);
-                    navigate('/login');
-                  } else {
-                    navigate('/login');
-                  }
-                }}
-                className="w-full sm:w-auto water-gradient text-white font-display text-xl px-8 py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-ocean/20"
-              >
-                GET STARTED <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          )}
+          <div className="max-w-xs mx-auto">
+            <Link
+              to="/dashboard"
+              className="w-full water-gradient text-white font-display text-xl px-8 py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap shadow-lg shadow-ocean/20"
+            >
+              GO TO DASHBOARD <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
 
           {/* Trust line */}
           <p className="font-body text-xs text-charcoalDark/40 mt-4">
@@ -531,40 +486,15 @@ export default function LandingPage() {
             Join thousands of farmers using AI to optimize water usage, diagnose crop diseases, and increase yields. It's free.
           </p>
 
-          {/* CTA Form */}
-          {isLoggedIn ? (
-            <div className="max-w-xs mx-auto">
-              <Link
-                to="/dashboard"
-                className="w-full bg-white text-ocean font-display text-xl px-8 py-4 rounded-xl shadow-xl hover:scale-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap"
-              >
-                GO TO DASHBOARD <ChevronRight className="w-5 h-5" />
-              </Link>
-            </div>
-          ) : (
-            <div className="flex flex-col sm:flex-row items-center gap-3 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={ctaEmail}
-                onChange={e => setCtaEmail(e.target.value)}
-                className="w-full sm:flex-1 border border-white/20 bg-white/10 backdrop-blur-sm font-body text-base text-white placeholder-white/40 px-6 py-4 rounded-xl focus:outline-none focus:border-white/40 transition-colors"
-              />
-              <button
-                onClick={() => {
-                  if (ctaEmail.trim()) {
-                    localStorage.setItem('SMART_AG_EMAIL', ctaEmail);
-                    navigate('/login');
-                  } else {
-                    navigate('/login');
-                  }
-                }}
-                className="w-full sm:w-auto bg-white text-ocean font-display text-xl px-8 py-4 rounded-xl shadow-xl hover:scale-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap"
-              >
-                GET STARTED <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          )}
+          {/* CTA Button */}
+          <div className="max-w-xs mx-auto">
+            <Link
+              to="/dashboard"
+              className="w-full bg-white text-ocean font-display text-xl px-8 py-4 rounded-xl shadow-xl hover:scale-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+            >
+              GO TO DASHBOARD <ChevronRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </section>
 

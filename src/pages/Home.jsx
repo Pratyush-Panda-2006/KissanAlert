@@ -14,17 +14,12 @@ export default function Home() {
 
   useEffect(() => {
     const loadData = () => {
-      const user = localStorage.getItem('SMART_AG_USER');
-      if (user) setUsername(user);
+      const user = localStorage.getItem('SMART_AG_USER') || 'Farmer';
+      setUsername(user);
       const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
       setScans(history);
     };
 
-    const user = localStorage.getItem('SMART_AG_USER');
-    if (!user) {
-      navigate('/login');
-      return;
-    }
     loadData();
 
     window.addEventListener('kisanalert_data_synced', loadData);

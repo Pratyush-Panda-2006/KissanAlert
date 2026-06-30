@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import CameraUpload from './pages/CameraUpload';
 import ScanHistory from './pages/ScanHistory';
 import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Weather from './pages/Weather';
 import ChatAssistant from './pages/ChatAssistant';
@@ -57,7 +56,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/security" element={<Security />} />
