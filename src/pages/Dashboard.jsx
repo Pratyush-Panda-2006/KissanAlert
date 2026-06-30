@@ -65,14 +65,23 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('livestock');
 
   useEffect(() => {
-    const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
-    setScans(history);
-    setMilkLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.MILK_YIELD) || '[]'));
-    setCropYieldLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.CROP_YIELD) || '[]'));
-    setWeightLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WEIGHT) || '[]'));
-    setGrowthLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.GROWTH) || '[]'));
-    setWaterLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WATER_USAGE) || '[]'));
-    setIrrigationLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.IRRIGATION) || '[]'));
+    const loadData = () => {
+      const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
+      setScans(history);
+      setMilkLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.MILK_YIELD) || '[]'));
+      setCropYieldLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.CROP_YIELD) || '[]'));
+      setWeightLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WEIGHT) || '[]'));
+      setGrowthLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.GROWTH) || '[]'));
+      setWaterLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WATER_USAGE) || '[]'));
+      setIrrigationLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.IRRIGATION) || '[]'));
+    };
+
+    loadData();
+
+    window.addEventListener('kisanalert_data_synced', loadData);
+    return () => {
+      window.removeEventListener('kisanalert_data_synced', loadData);
+    };
   }, []);
 
   // Stats

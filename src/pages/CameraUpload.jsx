@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getLangForAI } from '../utils/i18n';
 import { syncUserData } from '../utils/userDataSync';
+import { compressImage } from '../utils/imageCompressor';
 
 export default function CameraUpload() {
   const navigate = useNavigate();
@@ -150,9 +151,11 @@ CRITICAL INSTRUCTION: Translate the values of 'identity', 'diagnosis', 'severity
         return;
       }
       
+      const compressedImage = await compressImage(rawDataUrl, 600, 0.6);
+
       const newScan = {
         id: Date.now(),
-        image: rawDataUrl,
+        image: compressedImage,
         date: new Date().toLocaleDateString(),
         ...parsed
       };

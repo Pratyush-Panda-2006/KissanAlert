@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient';
 import { auth } from './firebase';
+import { compressImage } from './imageCompressor';
 
 /**
  * Syncs the local storage data to the Supabase database.
@@ -11,6 +12,27 @@ export async function syncUserData() {
     if (!user) return;
 
     const userId = user.uid;
+    const localHistory = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
+    
+    // Compress large base64 scan images on the fly if needed to prevent payload size errors
+    let historyChanged = false;
+    const compressedHistory = await Promise.all(
+      localHistory.map(async (scan) => {
+        if (scan.image && typeof scan.image === 'string' && scan.image.startsWith('data:') && scan.image.length > 50 * 1024) {
+          const compressed = await compressImage(scan.image, 600, 0.6);
+          if (compressed !== scan.image) {
+            historyChanged = true;
+            return { ...scan, image: compressed };
+          }
+        }
+        return scan;
+      })
+    );
+
+    if (historyChanged) {
+      localStorage.setItem('smartAgHistory', JSON.stringify(compressedHistory));
+    }
+
     const payload = {
       user_id: userId,
       data: {
@@ -19,7 +41,7 @@ export async function syncUserData() {
         farm_type: localStorage.getItem('SMART_AG_FARM_TYPE') || '',
         water_source: localStorage.getItem('SMART_AG_WATER_SOURCE') || '',
         lang: localStorage.getItem('SMART_AG_LANG') || '',
-        history: JSON.parse(localStorage.getItem('smartAgHistory') || '[]'),
+        history: compressedHistory,
         fields: JSON.parse(localStorage.getItem('farmbuddy_fields') || '[]'),
       },
       updated_at: new Date().toISOString()

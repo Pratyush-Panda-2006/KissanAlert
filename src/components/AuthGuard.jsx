@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Droplets } from 'lucide-react';
+import { fetchAndRestoreUserData } from '../utils/userDataSync';
 
 export default function AuthGuard({ children }) {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export default function AuthGuard({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        // Fetch and restore user data in background to sync other devices/sessions
+        fetchAndRestoreUserData(user.uid);
         setLoading(false);
       } else {
         navigate('/login');

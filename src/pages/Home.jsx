@@ -13,14 +13,24 @@ export default function Home() {
   const [selectedScan, setSelectedScan] = useState(null);
 
   useEffect(() => {
+    const loadData = () => {
+      const user = localStorage.getItem('SMART_AG_USER');
+      if (user) setUsername(user);
+      const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
+      setScans(history);
+    };
+
     const user = localStorage.getItem('SMART_AG_USER');
     if (!user) {
       navigate('/login');
       return;
     }
-    setUsername(user);
-    const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
-    setScans(history);
+    loadData();
+
+    window.addEventListener('kisanalert_data_synced', loadData);
+    return () => {
+      window.removeEventListener('kisanalert_data_synced', loadData);
+    };
   }, [navigate]);
 
   const issuesPicked = scans.filter(s => s.severity && s.severity !== 'Healthy').length;
