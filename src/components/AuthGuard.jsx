@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../utils/supabaseClient';
+import { auth } from '../utils/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { Droplets } from 'lucide-react';
 
 export default function AuthGuard({ children }) {
@@ -8,34 +9,15 @@ export default function AuthGuard({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-
-    // Check current session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (mounted) {
-        if (!session) {
-          navigate('/login');
-        } else {
-          setLoading(false);
-        }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setLoading(false);
+      } else {
+        navigate('/login');
       }
     });
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (mounted) {
-        if (event === 'SIGNED_OUT') {
-          navigate('/login');
-        } else if (session) {
-          setLoading(false);
-        }
-      }
-    });
-
-    return () => {
-      mounted = false;
-      subscription.unsubscribe();
-    };
+    return () => unsubscribe();
   }, [navigate]);
 
   if (loading) {

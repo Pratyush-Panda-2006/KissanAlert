@@ -1,4 +1,5 @@
 import { supabase } from './supabaseClient';
+import { auth } from './firebase';
 
 /**
  * Syncs the local storage data to the Supabase database.
@@ -6,10 +7,10 @@ import { supabase } from './supabaseClient';
  */
 export async function syncUserData() {
   try {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session || !session.user) return;
+    const user = auth.currentUser;
+    if (!user) return;
 
-    const userId = session.user.id;
+    const userId = user.uid;
     const payload = {
       user_id: userId,
       data: {

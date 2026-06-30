@@ -3,7 +3,8 @@ import { Key, Save, CheckCircle2, Languages, Moon, Sun, User2, Droplets, LogOut 
 import { getTranslation, LANGUAGES } from '../utils/i18n';
 import { useTheme } from '../utils/ThemeContext';
 import CustomSelect from '../components/CustomSelect';
-import { supabase } from '../utils/supabaseClient';
+import { auth } from '../utils/firebase';
+import { signOut } from 'firebase/auth';
 import { clearUserData, syncUserData } from '../utils/userDataSync';
 import { useNavigate } from 'react-router-dom';
 
@@ -70,7 +71,7 @@ export default function Profile() {
 
   const handleLogout = async () => {
     if (!window.confirm(t("Are you sure you want to log out?"))) return;
-    await supabase.auth.signOut();
+    await signOut(auth);
     clearUserData();
     navigate('/login');
   };
