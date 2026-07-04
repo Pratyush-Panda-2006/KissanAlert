@@ -395,22 +395,26 @@ const translateWithGemini = async (text, userLang, apiKey) => {
     const prompt = `You are a professional agricultural translator. Translate the following short English user interface text into the Indian language "${userLang}". Keep the tone professional, friendly, and natural for Indian farmers. Do not write any explanations, code, or quotes. Just output the direct translation.
 English text: "${text}"`;
 
-    let res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
-      })
-    });
-    
-    if (!res.ok) {
-      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }]
-        })
-      });
+    const modelNames = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    let res = null;
+    let success = false;
+
+    for (const modelName of modelNames) {
+      try {
+        res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }]
+          })
+        });
+        if (res.ok) {
+          success = true;
+          break;
+        }
+      } catch (err) {
+        console.warn(`Translation fetch failed for ${modelName}:`, err);
+      }
     }
     
     if (res.ok) {
@@ -448,7 +452,7 @@ export const getTranslation = (enString) => {
 
   // 3. Fallback to Gemini if key exists
   const apiKey = localStorage.getItem('GEMINI_API_KEY');
-  if (apiKey && apiKey.startsWith('AIza')) {
+  if (apiKey && apiKey.trim().length > 5) {
     translateWithGemini(enString, userLang, apiKey);
   }
 

@@ -76,6 +76,12 @@ export default function CameraUpload() {
     setAnalyzing(true);
     
     try {
+      // Pre-compress image to ensure fast upload and avoid API/network payload size errors
+      const compressedDataUrl = await compressImage(rawDataUrl, 800, 0.7);
+      const mimeMatch = compressedDataUrl.match(/^data:(image\/[a-zA-Z+-]+);base64,/);
+      const imageMimeType = mimeMatch ? mimeMatch[1] : "image/jpeg";
+      const cleanBase64 = compressedDataUrl.split(',')[1];
+
       const genAI = new GoogleGenerativeAI(apiKey);
       const prompt = `Analyze this image. FIRST, determine if the image contains any agricultural subject.
 
@@ -92,7 +98,7 @@ If it DOES contain crops or livestock, return ONLY this valid JSON:
   "identity": "Specific crop variety or livestock breed",
   "diagnosis": "Suspected disease/pest/deficiency (or say 'Healthy')",
   "severity": "Critical, Moderate, or Healthy",
-  "healthPercentage": <number from 0 to 100>,
+  "healthPercentage": 100,
   "affectedArea": "For Livestock: body part affected (e.g. skin, udder, hoof, eye). For Crops: affected plant part (e.g. leaf, stem, root, fruit)",
   "possibleConditions": ["Most likely condition", "Second possibility", "Third possibility"],
   "immediateCare": "First-aid or immediate steps a farmer should take right now before professional help arrives",
@@ -113,19 +119,16 @@ IMPORTANT RULES:
       
 CRITICAL INSTRUCTION: Translate the values of 'identity', 'diagnosis', 'severity', 'affectedArea', 'possibleConditions', 'immediateCare', 'urgency', 'actionPlan', 'waterStress', and 'irrigationAdvice' into ${userLang}. Keep JSON keys strictly in English.`;
       
-      const imagePart = { inlineData: { data: base64Data, mimeType: "image/jpeg" } };
+      const imagePart = { inlineData: { data: cleanBase64, mimeType: imageMimeType } };
 
       let responseText = "";
-      const modelNames = ["gemini-2.0-flash", "gemini-1.5-flash"];
+      const modelNames = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
       let success = false;
       let lastError = null;
 
       for (const modelName of modelNames) {
         try {
-          const model = genAI.getGenerativeModel({ 
-            model: modelName,
-            generationConfig: { responseMimeType: "application/json" }
-          });
+          const model = genAI.getGenerativeModel({ model: modelName });
           const fetchResult = await model.generateContent([prompt, imagePart]);
           responseText = fetchResult.response.text();
           success = true;
@@ -162,12 +165,10 @@ CRITICAL INSTRUCTION: Translate the values of 'identity', 'diagnosis', 'severity
         setAnalyzing(false);
         return;
       }
-      
-      const compressedImage = await compressImage(rawDataUrl, 600, 0.6);
 
       const newScan = {
         id: Date.now(),
-        image: compressedImage,
+        image: compressedDataUrl,
         date: new Date().toLocaleDateString(),
         ...parsed
       };
