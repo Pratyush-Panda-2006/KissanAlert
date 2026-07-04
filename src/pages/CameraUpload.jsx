@@ -116,13 +116,16 @@ CRITICAL INSTRUCTION: Translate the values of 'identity', 'diagnosis', 'severity
       const imagePart = { inlineData: { data: base64Data, mimeType: "image/jpeg" } };
 
       let responseText = "";
-      const modelNames = ["gemini-2.5-flash", "gemini-1.5-flash"];
+      const modelNames = ["gemini-2.0-flash", "gemini-1.5-flash"];
       let success = false;
       let lastError = null;
 
       for (const modelName of modelNames) {
         try {
-          const model = genAI.getGenerativeModel({ model: modelName });
+          const model = genAI.getGenerativeModel({ 
+            model: modelName,
+            generationConfig: { responseMimeType: "application/json" }
+          });
           const fetchResult = await model.generateContent([prompt, imagePart]);
           responseText = fetchResult.response.text();
           success = true;
@@ -140,7 +143,16 @@ CRITICAL INSTRUCTION: Translate the values of 'identity', 'diagnosis', 'severity
         throw lastError; 
       }
       
-      const cleanedText = responseText.replace(/```json/gi, "").replace(/```/g, "").trim();
+      const extractJSON = (text) => {
+        const start = text.indexOf('{');
+        const end = text.lastIndexOf('}');
+        if (start !== -1 && end !== -1 && end > start) {
+          return text.substring(start, end + 1);
+        }
+        return text;
+      };
+      
+      const cleanedText = extractJSON(responseText);
       const parsed = JSON.parse(cleanedText);
 
       // Validation Gate

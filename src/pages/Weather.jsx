@@ -234,7 +234,7 @@ Provide a SMART IRRIGATION ADVISORY with:
 Format with clear sections and emojis. Be concise but actionable.
 CRITICAL INSTRUCTION: You MUST write the ENTIRE response (all text, titles, warnings, and schedules) in the language: ${userLang}. Do NOT use English under any circumstances except for standard measurements or units. Translate everything. Keep each section to 2-3 lines max.`;
 
-      const modelNames = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+      const modelNames = ['gemini-2.0-flash', 'gemini-1.5-flash'];
       let responseText = '';
       for (const modelName of modelNames) {
         try {
@@ -287,7 +287,7 @@ Be specific to their crops/animals. If no scans, give general seasonal advice.
 Include at least one water management alert.
 CRITICAL INSTRUCTION: You MUST write the ENTIRE response in the language: ${userLang}. Do NOT use English under any circumstances. Translate everything, including any titles and emojis labels. Keep it concise.`;
 
-      const modelNames = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+      const modelNames = ['gemini-2.0-flash', 'gemini-1.5-flash'];
       let responseText = '';
       for (const modelName of modelNames) {
         try {

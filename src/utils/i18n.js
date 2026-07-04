@@ -395,13 +395,23 @@ const translateWithGemini = async (text, userLang, apiKey) => {
     const prompt = `You are a professional agricultural translator. Translate the following short English user interface text into the Indian language "${userLang}". Keep the tone professional, friendly, and natural for Indian farmers. Do not write any explanations, code, or quotes. Just output the direct translation.
 English text: "${text}"`;
 
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+    let res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }]
       })
     });
+    
+    if (!res.ok) {
+      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+    }
     
     if (res.ok) {
       const resData = await res.json();

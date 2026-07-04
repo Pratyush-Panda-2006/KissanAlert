@@ -199,7 +199,7 @@ export default function Dashboard() {
         Format with clear sections. Respond in ${userLang}.`;
       }
 
-      const modelNames = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+      const modelNames = ['gemini-2.0-flash', 'gemini-1.5-flash'];
       let responseText = '';
       for (const modelName of modelNames) {
         try {
