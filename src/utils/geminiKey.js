@@ -19,6 +19,18 @@ export function getGeminiApiKey() {
   return '';
 }
 
+export function setGeminiApiKey(key) {
+  if (key && typeof key === 'string') {
+    localStorage.setItem('GEMINI_API_KEY', key.trim());
+  } else {
+    localStorage.removeItem('GEMINI_API_KEY');
+  }
+}
+
+export function removeGeminiApiKey() {
+  localStorage.removeItem('GEMINI_API_KEY');
+}
+
 export function hasCustomGeminiApiKey() {
   const userKey = localStorage.getItem('GEMINI_API_KEY');
   return !!(userKey && userKey.trim().length > 0);
@@ -32,3 +44,4 @@ export function hasDefaultGeminiApiKey() {
 export function hasAnyGeminiApiKey() {
   return !!getGeminiApiKey();
 }
+
