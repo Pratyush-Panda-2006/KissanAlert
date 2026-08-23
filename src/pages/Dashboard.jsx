@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { TrendingUp, Milk, Weight, Wheat, AlertTriangle, Sparkles, Plus, Trash2, Loader2, Droplets } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getTranslation } from '../utils/i18n';
+import { getGeminiApiKey } from '../utils/geminiKey';
 import CustomSelect from '../components/CustomSelect';
 
 const STORAGE_KEYS = {
@@ -137,8 +138,8 @@ export default function Dashboard() {
 
   // AI Plans
   const getAIPlan = async (type) => {
-    const apiKey = localStorage.getItem('GEMINI_API_KEY');
-    if (!apiKey) { alert('Please set your Gemini API key in Settings first.'); return; }
+    const apiKey = getGeminiApiKey();
+    if (!apiKey) { alert('Please configure a Gemini API key in Settings or set VITE_GEMINI_API_KEY in .env.'); return; }
 
     const isLivestock = type === 'feed';
     const isWater = type === 'water';

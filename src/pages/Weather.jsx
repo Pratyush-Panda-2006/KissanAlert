@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { CloudRain, Sun, Wind, Droplets, Thermometer, Eye, Loader2, MapPin, Sparkles, AlertTriangle, CloudSnow, Cloud, CloudSun, CloudDrizzle, Cloudy } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getTranslation, getLangForAI } from '../utils/i18n';
+import { getGeminiApiKey } from '../utils/geminiKey';
 
 const INDIAN_API_KEY = 'sk-live-53uikf89OPzAFpjJWJMtU84OxsMD4uPEWeqC21dP';
 
@@ -195,8 +196,8 @@ export default function Weather() {
 
   // ─── AI Smart Irrigation Advisory ───
   const generateIrrigationAdvice = async () => {
-    const apiKey = localStorage.getItem('GEMINI_API_KEY');
-    if (!apiKey) { alert('Please set your Gemini API key in Settings first.'); return; }
+    const apiKey = getGeminiApiKey();
+    if (!apiKey) { alert('Please configure a Gemini API key in Settings or set VITE_GEMINI_API_KEY in .env.'); return; }
     setLoadingIrrigation(true);
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
@@ -255,8 +256,8 @@ CRITICAL INSTRUCTION: You MUST write the ENTIRE response (all text, titles, warn
 
   // ─── AI Smart Alerts ───
   const generateSmartAlert = async () => {
-    const apiKey = localStorage.getItem('GEMINI_API_KEY');
-    if (!apiKey) { alert('Please set your Gemini API key in Settings first.'); return; }
+    const apiKey = getGeminiApiKey();
+    if (!apiKey) { alert('Please configure a Gemini API key in Settings or set VITE_GEMINI_API_KEY in .env.'); return; }
     setLoadingAlert(true);
     try {
       const genAI = new GoogleGenerativeAI(apiKey);

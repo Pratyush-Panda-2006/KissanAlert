@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Send, Mic, MicOff, Sparkles, Loader2, Trash2, Bot, User } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getTranslation, getLangForAI } from '../utils/i18n';
+import { getGeminiApiKey } from '../utils/geminiKey';
 
 export default function ChatAssistant() {
   const t = getTranslation;
@@ -119,8 +120,8 @@ INSTRUCTIONS:
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-    const apiKey = localStorage.getItem('GEMINI_API_KEY');
-    if (!apiKey) { alert('Please set your Gemini API key in Settings first.'); return; }
+    const apiKey = getGeminiApiKey();
+    if (!apiKey) { alert('Please configure a Gemini API key in Settings or set VITE_GEMINI_API_KEY in .env.'); return; }
 
     const userMsg = { role: 'user', text: input.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
     setMessages(prev => [...prev, userMsg]);

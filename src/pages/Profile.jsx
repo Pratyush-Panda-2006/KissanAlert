@@ -4,6 +4,7 @@ import { getTranslation, LANGUAGES } from '../utils/i18n';
 import { useTheme } from '../utils/ThemeContext';
 import CustomSelect from '../components/CustomSelect';
 import { clearUserData, syncUserData } from '../utils/userDataSync';
+import { hasDefaultGeminiApiKey } from '../utils/geminiKey';
 
 export default function Profile() {
   const [apiKey, setApiKey] = useState('');
@@ -160,9 +161,15 @@ export default function Profile() {
             type="password" 
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            placeholder="AIzaSy..." 
-            className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white placeholder-charcoalDark/30 outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-aqua transition-colors"
+            placeholder={hasDefaultGeminiApiKey() ? "Using default key (optional: paste your own key)" : "AIzaSy..."} 
+            className="w-full bg-white dark:bg-charcoalDark h-14 rounded-lg px-4 font-body text-sm font-medium text-charcoalDark dark:text-white placeholder-charcoalDark/40 outline-none border border-charcoalDark/20 dark:border-white/10 focus:border-aqua transition-colors"
           />
+          {hasDefaultGeminiApiKey() && !apiKey && (
+            <p className="font-body text-[11px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-medium leading-relaxed bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20 flex items-center gap-2">
+              <span>✨</span>
+              <span>Project default API key is active. All users can use AI crop diagnosis, chat, and weather advisories freely without entering a key!</span>
+            </p>
+          )}
           {showError && (
             <p className="font-body text-[10px] sm:text-xs text-coralRed font-medium leading-relaxed bg-coralRed/5 p-3 rounded-lg border border-coralRed/20 animate-bounce">
               * Note: Do NOT use your Firebase App config API key here. It will result in a 404 error. Please generate a dedicated Gemini API key at aistudio.google.com

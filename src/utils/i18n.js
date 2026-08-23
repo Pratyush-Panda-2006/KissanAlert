@@ -436,6 +436,8 @@ English text: "${text}"`;
   }
 };
 
+import { getGeminiApiKey } from './geminiKey';
+
 export const getTranslation = (enString) => {
   if (!enString) return '';
   const userLang = localStorage.getItem('SMART_AG_LANG') || 'English';
@@ -451,7 +453,7 @@ export const getTranslation = (enString) => {
   if (cache[enString]) return cache[enString];
 
   // 3. Fallback to Gemini if key exists
-  const apiKey = localStorage.getItem('GEMINI_API_KEY');
+  const apiKey = getGeminiApiKey();
   if (apiKey && apiKey.trim().length > 5) {
     translateWithGemini(enString, userLang, apiKey);
   }

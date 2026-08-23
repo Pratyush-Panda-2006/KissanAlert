@@ -5,6 +5,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getLangForAI } from '../utils/i18n';
 import { syncUserData } from '../utils/userDataSync';
 import { compressImage } from '../utils/imageCompressor';
+import { getGeminiApiKey } from '../utils/geminiKey';
 
 export default function CameraUpload() {
   const navigate = useNavigate();
@@ -63,12 +64,12 @@ export default function CameraUpload() {
   const processImageBuffer = async (base64Data, rawDataUrl) => {
     stopCamera();
     
-    const apiKey = localStorage.getItem('GEMINI_API_KEY');
+    const apiKey = getGeminiApiKey();
     const rawLang = localStorage.getItem('SMART_AG_LANG') || 'English';
     const userLang = getLangForAI(rawLang);
 
     if (!apiKey) {
-      alert("Please configure your Gemini API Key in the Settings page first.");
+      alert("Please configure your Gemini API Key in the Settings page or set VITE_GEMINI_API_KEY in .env.");
       navigate('/profile');
       return;
     }
