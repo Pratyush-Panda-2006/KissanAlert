@@ -51,7 +51,7 @@ function AddFieldMarker({ onAdd }) {
 export default function FarmMap() {
   const t = getTranslation;
   const [fields, setFields] = useState(() => {
-    const saved = localStorage.getItem('farmbuddy_fields');
+    const saved = localStorage.getItem('kissanalert_fields') || localStorage.getItem('farmbuddy_fields');
     return saved ? JSON.parse(saved) : [];
   });
   const [center, setCenter] = useState([20.5937, 78.9629]); // India center
@@ -75,6 +75,7 @@ export default function FarmMap() {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem('kissanalert_fields', JSON.stringify(fields));
     localStorage.setItem('farmbuddy_fields', JSON.stringify(fields));
     syncUserData(); // Sync map data to backend
   }, [fields]);

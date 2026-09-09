@@ -7,7 +7,7 @@ pptx.layout = 'LAYOUT_16x9';
 // Slide 1: Primary Title //
 let slide1 = pptx.addSlide();
 slide1.background = { fill: '171E19' };
-slide1.addText('🌾 FarmBuddy', { x: '10%', y: '30%', w: '80%', fontSize: 48, bold: true, align: 'center', color: 'FFE17C' });
+slide1.addText('🌾 KissanAlert', { x: '10%', y: '30%', w: '80%', fontSize: 48, bold: true, align: 'center', color: 'FFE17C' });
 slide1.addText('AI-Powered Smart Agriculture Diagnostic Platform\nScan. Diagnose. Protect.', { x: '10%', y: '50%', w: '80%', fontSize: 24, align: 'center', color: '2EC4B6' });
 
 // Slide 2: The Problem //
@@ -29,7 +29,7 @@ slide2.addText([
 // Slide 3: The Solution //
 let slide3 = pptx.addSlide();
 slide3.background = { fill: 'FFFFFF' };
-slide3.addText('FarmBuddy: The Solution', { x: '5%', y: '5%', w: '90%', fontSize: 32, bold: true, color: '171E19', border: [0,0,{pt:'2', color:'2EC4B6'},0] });
+slide3.addText('KissanAlert: The Solution', { x: '5%', y: '5%', w: '90%', fontSize: 32, bold: true, color: '171E19', border: [0,0,{pt:'2', color:'2EC4B6'},0] });
 slide3.addText([
     { text: 'Instant AI Diagnosis:\n', options: { bold: true, fontSize: 24, color: '2EC4B6' } },
     { text: 'Farmers photograph a sick crop/animal → AI returns diagnosis in < 3s.\n\n', options: { fontSize: 20 } },
@@ -101,7 +101,7 @@ slide7.addText([
 
 
 // Save Presentation //
-pptx.writeFile({ fileName: 'FarmBuddy_Pitch_Deck.pptx' }).then(fileName => {
+pptx.writeFile({ fileName: 'KissanAlert_Pitch_Deck.pptx' }).then(fileName => {
     console.log('Successfully saved ' + fileName);
 }).catch(err => {
     console.error('Error generating PPTX:', err);
