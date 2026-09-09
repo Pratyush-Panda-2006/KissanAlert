@@ -6,10 +6,10 @@ import { getGeminiApiKey } from '../utils/geminiKey';
 import CustomSelect from '../components/CustomSelect';
 
 const STORAGE_KEYS = {
-  MILK_YIELD: 'farmbuddy_milk_yield',
-  CROP_YIELD: 'farmbuddy_crop_yield',
-  WEIGHT: 'farmbuddy_weight_log',
-  GROWTH: 'farmbuddy_growth_log',
+  MILK_YIELD: 'kisanalert_milk_yield',
+  CROP_YIELD: 'kisanalert_crop_yield',
+  WEIGHT: 'kisanalert_weight_log',
+  GROWTH: 'kisanalert_growth_log',
   WATER_USAGE: 'kisanalert_water_usage',
   IRRIGATION: 'kisanalert_irrigation_log',
 };
@@ -69,10 +69,10 @@ export default function Dashboard() {
     const loadData = () => {
       const history = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
       setScans(history);
-      setMilkLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.MILK_YIELD) || '[]'));
-      setCropYieldLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.CROP_YIELD) || '[]'));
-      setWeightLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WEIGHT) || '[]'));
-      setGrowthLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.GROWTH) || '[]'));
+      setMilkLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.MILK_YIELD) || localStorage.getItem('farmbuddy_milk_yield') || '[]'));
+      setCropYieldLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.CROP_YIELD) || localStorage.getItem('farmbuddy_crop_yield') || '[]'));
+      setWeightLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WEIGHT) || localStorage.getItem('farmbuddy_weight_log') || '[]'));
+      setGrowthLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.GROWTH) || localStorage.getItem('farmbuddy_growth_log') || '[]'));
       setWaterLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.WATER_USAGE) || '[]'));
       setIrrigationLog(JSON.parse(localStorage.getItem(STORAGE_KEYS.IRRIGATION) || '[]'));
     };

@@ -42,7 +42,7 @@ export async function syncUserData() {
         water_source: localStorage.getItem('SMART_AG_WATER_SOURCE') || '',
         lang: localStorage.getItem('SMART_AG_LANG') || '',
         history: compressedHistory,
-        fields: JSON.parse(localStorage.getItem('farmbuddy_fields') || '[]'),
+        fields: JSON.parse(localStorage.getItem('kissanalert_fields') || localStorage.getItem('farmbuddy_fields') || '[]'),
       },
       updated_at: new Date().toISOString()
     };
@@ -86,7 +86,10 @@ export async function fetchAndRestoreUserData(userId) {
       if (d.water_source) localStorage.setItem('SMART_AG_WATER_SOURCE', d.water_source);
       if (d.lang) localStorage.setItem('SMART_AG_LANG', d.lang);
       if (d.history) localStorage.setItem('smartAgHistory', JSON.stringify(d.history));
-      if (d.fields) localStorage.setItem('farmbuddy_fields', JSON.stringify(d.fields));
+      if (d.fields) {
+        localStorage.setItem('kissanalert_fields', JSON.stringify(d.fields));
+        localStorage.setItem('farmbuddy_fields', JSON.stringify(d.fields));
+      }
       
       // Dispatch an event to update state in the application pages
       window.dispatchEvent(new Event('kisanalert_translation_updated'));
@@ -108,6 +111,7 @@ export function clearUserData() {
   localStorage.removeItem('SMART_AG_WATER_SOURCE');
   localStorage.removeItem('SMART_AG_LANG');
   localStorage.removeItem('smartAgHistory');
+  localStorage.removeItem('kissanalert_fields');
   localStorage.removeItem('farmbuddy_fields');
   localStorage.removeItem('kisanalert_cached_weather');
   localStorage.removeItem('kisanalert_cached_weather_city');

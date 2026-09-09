@@ -75,10 +75,10 @@ export default function ChatAssistant() {
 
   const buildSystemContext = () => {
     const scans = JSON.parse(localStorage.getItem('smartAgHistory') || '[]');
-    const milkLog = JSON.parse(localStorage.getItem('farmbuddy_milk_yield') || '[]');
-    const weightLog = JSON.parse(localStorage.getItem('farmbuddy_weight_log') || '[]');
-    const cropYieldLog = JSON.parse(localStorage.getItem('farmbuddy_crop_yield') || '[]');
-    const growthLog = JSON.parse(localStorage.getItem('farmbuddy_growth_log') || '[]');
+    const milkLog = JSON.parse(localStorage.getItem('kisanalert_milk_yield') || localStorage.getItem('farmbuddy_milk_yield') || '[]');
+    const weightLog = JSON.parse(localStorage.getItem('kisanalert_weight_log') || localStorage.getItem('farmbuddy_weight_log') || '[]');
+    const cropYieldLog = JSON.parse(localStorage.getItem('kisanalert_crop_yield') || localStorage.getItem('farmbuddy_crop_yield') || '[]');
+    const growthLog = JSON.parse(localStorage.getItem('kisanalert_growth_log') || localStorage.getItem('farmbuddy_growth_log') || '[]');
     const username = localStorage.getItem('SMART_AG_USER') || 'Farmer';
     const userLang = getLangForAI(localStorage.getItem('SMART_AG_LANG') || 'English');
     const farmType = localStorage.getItem('SMART_AG_FARM_TYPE') || 'Not specified';
