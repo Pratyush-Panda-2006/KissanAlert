@@ -66,9 +66,7 @@ Create a `.env` file in the `smart-ag` directory (or use the setting panel insid
 VITE_GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
-### 3. Run Development Server
-```bash
-npm run dev
+
 ```
 Open `http://localhost:5173/` in your browser.
 
