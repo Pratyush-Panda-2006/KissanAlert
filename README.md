@@ -72,11 +72,6 @@ npm run dev
 ```
 Open `http://localhost:5173/` in your browser.
 
-### 4. Build for Production (PWA)
-```bash
-npm run build
-```
-The compiled files, manifest, and service workers will be generated in the `dist/` directory.
 
 ---
 
